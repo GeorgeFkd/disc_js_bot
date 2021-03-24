@@ -15,6 +15,9 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
+  if(msg.content.includes("bad joke")){
+    msg.reply("I don't give a shit for your worthless opinion");
+  }
   if (msg.content === 'ping') {
     msg.reply('pong');
     msg.channel.send('pong');
