@@ -4,8 +4,15 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 process.env.TOKEN = 'ODI0MjczNzQyOTQzMzU0OTAw.YFs-vg._fg_1ayLm7wCtK7l7RuelDeNEVM'
 ;
-const TOKEN = process.env.TOKEN;
+//c4
+const serverID = '767468807328628776';
+console.log(bot.channels);
 
+const TOKEN = process.env.TOKEN;
+//change3
+
+const clownChannel = bot.channels.get(serverID);
+//Discord.Message.guild.channels.find(channel=>channel.name==="🤡moments");
 const nonAppreciation = ['bad joke','disapointment',
                         'didnt laugh','not funny'];
 const nonAppreciationResponse = ["im calling the fbi to see who asked",
@@ -20,18 +27,23 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
-<<<<<<< HEAD
   // if(msg.content.includes("bad joke")){
   //   msg.reply("I don't give a shit for your worthless opinion");
   // }
   if(nonAppreciation.some((str)=>msg.content.includes(str))){
     const index =Math.floor(Math.random()*nonAppreciation.length);
     msg.reply(nonAppreciationResponse[index]);
-=======
-  if(msg.content.includes("bad joke")){
-    msg.reply("I don't give a shit for your worthless opinion");
->>>>>>> 9344dbddb90088cb743574a28983e12db78feda0
   }
+  //change2
+  if(msg.content ==='gimme a clown'){
+    const clownMoments = await clownChannel.fetchMessage({limit:100});
+    msg.reply(clownMoments);
+    msg.reply(clownMoments[Math.floor(Math.random()*clownMoments.length)]);
+  }
+  //chang1  
+  //if(msg.content.includes("bad joke")){
+  //   msg.reply("I don't give a shit for your worthless opinion");
+  // }
   if (msg.content === 'ping') {
     msg.reply('pong');
     msg.channel.send('pong');
