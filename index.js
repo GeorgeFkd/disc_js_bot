@@ -36,14 +36,7 @@ bot.on('message', async msg => {
     msgCollection(msg,lastMsg,writeMsg);
   }
 
-  // const{ name,region,memberCount} = guild;
-  // console.log(name,region,memberCount);
-  // msg.channel.fetchMessages({around:clownId,limit:5})
-  // .then(messages =>{
-  //   const fetched = messages.first();
-  //   console.log(fetched);
-  //   msg.reply(fetched);
-  // })
+  
   if(msg.content === 'clown moment'){
     fs.readFile('🤡moments.txt','utf-8',(err,data)=>{
       if(err){
@@ -57,28 +50,12 @@ bot.on('message', async msg => {
   if(nonAppreciation.some((str)=>msg.content.includes(str))){
     const index =Math.floor(Math.random()*nonAppreciation.length);
     msg.reply(nonAppreciationResponse[index]);
-<<<<<<< HEAD
-
-=======
->>>>>>> 41f8a2af8462227550a9a5dac4bba2deb7e9a76e
   }
+  
   if(msg.content.includes("bad joke")){
     msg.reply("I don't give a shit for your worthless opinion");
   }
-<<<<<<< HEAD
-=======
-  //change2
-  if(msg.content ==='gimme a clown'){
-    msg.reply(clownChannel);
-    const clownMoments = await clownChannel.fetchMessage({limit:100});
-    msg.reply(clownMoments);
-    msg.reply(clownMoments[Math.floor(Math.random()*clownMoments.length)]);
-  }
-  //chang1  
-  //if(msg.content.includes("bad joke")){
-  //   msg.reply("I don't give a shit for your worthless opinion");
-  // }
->>>>>>> 41f8a2af8462227550a9a5dac4bba2deb7e9a76e
+  
   if (msg.content === 'ping') {
     msg.reply('pong');
     msg.channel.send('pong');
