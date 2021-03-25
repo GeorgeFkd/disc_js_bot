@@ -1,3 +1,4 @@
+const fs = require('fs');
 require('dotenv').config();
 const jokes = require('give-me-a-joke');
 const Discord = require('discord.js');
@@ -5,13 +6,14 @@ const bot = new Discord.Client();
 process.env.TOKEN = 'ODI0MjczNzQyOTQzMzU0OTAw.YFs-vg._fg_1ayLm7wCtK7l7RuelDeNEVM'
 ;
 //c4
-const serverID = '767468807328628776';
-console.log(bot.channels);
+const serverID = '810928650513416242';
+const clownId = '810928650513416242';
 
 const TOKEN = process.env.TOKEN;
 //change3
 
-const clownChannel = bot.channels.get(serverID);
+
+//const clownChannel = bot.channels.get('810928650513416242');
 //Discord.Message.guild.channels.find(channel=>channel.name==="🤡moments");
 const nonAppreciation = ['bad joke','disapointment',
                         'didnt laugh','not funny'];
@@ -27,29 +29,39 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
-  // if(msg.content.includes("bad joke")){
-  //   msg.reply("I don't give a shit for your worthless opinion");
-  // }
+  if(msg.content ==='save'){
+    msg.reply("currently saving them");
+    let writeMsg=[];
+    let lastMsg = msg.channel.lastMessageID;
+    msgCollection(msg,lastMsg,writeMsg);
+  }
+
+  // const{ name,region,memberCount} = guild;
+  // console.log(name,region,memberCount);
+  // msg.channel.fetchMessages({around:clownId,limit:5})
+  // .then(messages =>{
+  //   const fetched = messages.first();
+  //   console.log(fetched);
+  //   msg.reply(fetched);
+  // })
+  if(msg.content === 'clown moment'){
+    fs.readFile('🤡moments.txt','utf-8',(err,data)=>{
+      if(err){
+        console.error(err);
+        return;
+      }
+      let dataArr = data.split(',').join().split('\n');
+      msg.reply(dataArr[Math.floor(Math.random()*dataArr.length)])
+    })
+  }
   if(nonAppreciation.some((str)=>msg.content.includes(str))){
     const index =Math.floor(Math.random()*nonAppreciation.length);
     msg.reply(nonAppreciationResponse[index]);
-<<<<<<< HEAD
-=======
+
   }
   if(msg.content.includes("bad joke")){
     msg.reply("I don't give a shit for your worthless opinion");
->>>>>>> 07399be4529e154a56b2b3bdc38082e556d378e2
   }
-  //change2
-  if(msg.content ==='gimme a clown'){
-    const clownMoments = await clownChannel.fetchMessage({limit:100});
-    msg.reply(clownMoments);
-    msg.reply(clownMoments[Math.floor(Math.random()*clownMoments.length)]);
-  }
-  //chang1  
-  //if(msg.content.includes("bad joke")){
-  //   msg.reply("I don't give a shit for your worthless opinion");
-  // }
   if (msg.content === 'ping') {
     msg.reply('pong');
     msg.channel.send('pong');
@@ -83,3 +95,41 @@ bot.on('message', async msg => {
     }
   }
 })
+function msgCollection(message, lastMsg, writeMsg) {
+  let overflowToggle = true;
+
+  //  Works Reverse Chronologically:  It Grabs Recent Messages First and Works Backwards.
+  message.channel.fetchMessages({ limit: 100, before: lastMsg })
+  .then(messages => {
+      messages.array().forEach((message, index)=>{  //  Funnels the last 100 Messages into an Array
+          writeMsg.push(`${message.content}`);  //  Writes the Message Author and Content to an Array
+
+          //  Checks if a Text Channel has more than 100 Messages and Recursively Readies the Second Block of 100 Messages
+          if (index == 99) {
+              lastMsg = message.id;
+              overflowToggle = false;  //  Toggle to Make Sure All Messages are Collected in The Array Prior to being Written to a File.
+              msgCollection(message, lastMsg, writeMsg)
+          }
+      })
+      writeToFile(message, writeMsg, overflowToggle);  //  Sends the Array to be Written to a File
+  })
+  .catch(console.error);  //  Catches Promise Errors
+}
+
+
+function writeToFile(message, writeMsg, overflowToggle) {
+  console.log('Block Saved!');
+  if (overflowToggle == true) {
+
+      let d = new Date();
+      let fileName = message.channel.name + '.txt';
+
+      for (i=writeMsg.length-1; i>=0; i--) {
+          fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
+              if (err) throw err;
+          })
+      }
+
+  }
+
+}
