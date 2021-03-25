@@ -6,7 +6,12 @@ process.env.TOKEN = 'ODI0MjczNzQyOTQzMzU0OTAw.YFs-vg._fg_1ayLm7wCtK7l7RuelDeNEVM
 ;
 const TOKEN = process.env.TOKEN;
 
-
+const nonAppreciation = ['bad joke','disapointment',
+                        'didnt laugh','not funny'];
+const nonAppreciationResponse = ["im calling the fbi to see who asked",
+                                "The cia is investigating who asked for your opinion",
+                              'how you think i care for your opinion?',
+                              "I don't give a shit for your worthless opinion" ]
 
 bot.login(TOKEN);
 
@@ -15,6 +20,13 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
+  // if(msg.content.includes("bad joke")){
+  //   msg.reply("I don't give a shit for your worthless opinion");
+  // }
+  if(nonAppreciation.some((str)=>msg.content.includes(str))){
+    const index =Math.floor(Math.random()*nonAppreciation.length);
+    msg.reply(nonAppreciationResponse[index]);
+  }
   if (msg.content === 'ping') {
     msg.reply('pong');
     msg.channel.send('pong');
@@ -47,5 +59,4 @@ bot.on('message', async msg => {
       msg.reply(`sth went wrong ${e}`);
     }
   }
-  
-});
+})
