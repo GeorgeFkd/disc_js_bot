@@ -33,6 +33,12 @@ bot.on('message', async msg => {
   if(nonAppreciation.some((str)=>msg.content.includes(str))){
     const index =Math.floor(Math.random()*nonAppreciation.length);
     msg.reply(nonAppreciationResponse[index]);
+<<<<<<< HEAD
+=======
+  }
+  if(msg.content.includes("bad joke")){
+    msg.reply("I don't give a shit for your worthless opinion");
+>>>>>>> 07399be4529e154a56b2b3bdc38082e556d378e2
   }
   //change2
   if(msg.content ==='gimme a clown'){
