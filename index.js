@@ -20,12 +20,17 @@ bot.on('ready', () => {
 });
 
 bot.on('message', async msg => {
+<<<<<<< HEAD
   // if(msg.content.includes("bad joke")){
   //   msg.reply("I don't give a shit for your worthless opinion");
   // }
   if(nonAppreciation.some((str)=>msg.content.includes(str))){
     const index =Math.floor(Math.random()*nonAppreciation.length);
     msg.reply(nonAppreciationResponse[index]);
+=======
+  if(msg.content.includes("bad joke")){
+    msg.reply("I don't give a shit for your worthless opinion");
+>>>>>>> 9344dbddb90088cb743574a28983e12db78feda0
   }
   if (msg.content === 'ping') {
     msg.reply('pong');
