@@ -39,6 +39,7 @@ bot.on('message', async msg => {
   }
   //change2
   if(msg.content ==='gimme a clown'){
+    msg.reply(clownChannel);
     const clownMoments = await clownChannel.fetchMessage({limit:100});
     msg.reply(clownMoments);
     msg.reply(clownMoments[Math.floor(Math.random()*clownMoments.length)]);
