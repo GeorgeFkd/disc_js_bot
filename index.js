@@ -22,10 +22,8 @@ bot.login(TOKEN);
 
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
-  const filename = 'E:/projects/webdev_backup/webDev/discordBot/discord-bot-sitepoint/program.txt';
-  //const [rules,rules_info] = 
+  const filename = './program.txt';
   bot.commands.get("setupschedule").execute(filename,bot);
-  //addRulesInSchedule(rules,rules_info);
 });
 
 bot.on('message', async message => {
