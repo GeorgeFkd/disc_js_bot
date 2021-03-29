@@ -22,7 +22,7 @@ bot.login(TOKEN);
 
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
-  const filename = './program.txt';
+  const filename = 'program.txt';
   bot.commands.get("setupschedule").execute(filename,bot);
 });
 
