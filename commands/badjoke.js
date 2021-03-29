@@ -1,3 +1,5 @@
+const email = require("./email");
+
 const nonAppreciation = ['bad joke','disapointment',
                         'didnt laugh','not funny'];
 const nonAppreciationResponse = ["im calling the fbi to see who asked",
@@ -9,12 +11,19 @@ module.exports ={
     name:"badjoke",
     description:"you dont appreciate my humor",
     execute(message,args){
-        if(nonAppreciation.some(str=>message.content
-            .includes(str))){
-                const index = Math.floor(Math.random()*
-                nonAppreciation.length);
-                message.reply(nonAppreciationResponse[index]);
-            }
+        
+        try {
+            if(nonAppreciation.some(str=>message.content
+                .includes(str))){
+                    const index = Math.floor(Math.random()*
+                    nonAppreciation.length);
+                    message.reply(nonAppreciationResponse[index]);
+                }
+        } catch (err) {
+            console.log(e);
+            message.channel.send("Something went terribly wrong and you should wait");
+            email.execute(message,args);
+        }
 
     }
 }

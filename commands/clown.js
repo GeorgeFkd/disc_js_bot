@@ -7,7 +7,8 @@ module.exports = {
     execute(message,args){
         fs.readFile('🤡moments.txt','utf-8',(err,data)=>{
             if(err){
-                console.error(err);
+                message.channel.send("Something went terribly wrong and you should wait");
+                email.execute(message,[e]);
                 return;
             }
             let dataArr = data.split(',').join().split('\n');

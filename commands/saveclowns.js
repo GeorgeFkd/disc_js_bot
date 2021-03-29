@@ -1,5 +1,6 @@
 
 const fs = require("fs");
+const email = require("./email");
 module.exports = {
     name:"saveclowns",
     description:"saves the contents of the clown text channel",
@@ -31,7 +32,10 @@ function msgCollection(message, lastMsg, writeMsg) {
         })
         writeToFile(message, writeMsg, overflowToggle);  //  Sends the Array to be Written to a File
     })
-    .catch(console.error);  //  Catches Promise Errors
+    .catch(err=>{
+        message.reply("something went wrong")
+        email.execute(message,[])
+    });  //  Catches Promise Errors
   }
   
   
@@ -45,7 +49,11 @@ function msgCollection(message, lastMsg, writeMsg) {
         fs.writeFileSync(fileName,'');
         for (i=writeMsg.length-1; i>=0; i--) {
             fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
-                if (err) throw err;
+                if (err) {
+                    message.reply("something went wrong")
+                    email.execute(message,[])
+                    throw err;
+                }
             })
         }
   

@@ -1,11 +1,14 @@
 const fs = require('fs');
+const schedule = require("node-schedule");
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const {prefix,token:TOKEN} = require('./config.json');
 bot.commands = new Discord.Collection();
 
+
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
+
 
 for(const file of commandFiles){
   const command = require(`./commands/${file}`);
@@ -19,10 +22,14 @@ bot.login(TOKEN);
 
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
+  const filename = 'E:/projects/webdev_backup/webDev/discordBot/discord-bot-sitepoint/program.txt';
+  //const [rules,rules_info] = 
+  bot.commands.get("setupschedule").execute(filename,bot);
+  //addRulesInSchedule(rules,rules_info);
 });
 
 bot.on('message', async message => {
-  //if(message.content==="reset")resetBot(message.channel);
+  if(message.content==="reset")resetBot(message.channel);
 
   const isInsult = nonAppreciation.includes(message.content); 
   if ((!message.content.startsWith(prefix) || message.author.bot)&& !isInsult) return;
@@ -47,9 +54,3 @@ bot.on('message', async message => {
 })
 
 
-// function resetBot(channel){
-//   channel.send("Resetting...")
-//   .then(msg=>bot.destroy())
-//   .then(()=>bot.login(TOKEN))
-  
-// }

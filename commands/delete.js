@@ -1,3 +1,4 @@
+const email = require("./email");
 
 
 module.exports = {
@@ -6,11 +7,17 @@ module.exports = {
     execute(message,args){
         
         let [arg] = args;
-        arg = parseInt(arg);
-        console.log(typeof arg);
-        if(message.channel.type === 'text'){
-            message.channel.bulkDelete(arg);
-            message.reply('we ok');
+        try{
+            arg = parseInt(arg);
+            //console.log(typeof arg);
+            if(message.channel.type === 'text'){
+                message.channel.bulkDelete(arg);
+                message.reply('we ok');
+            }
+        }catch(e){
+            console.log(e);
+            message.channel.send("Something went terribly wrong and you should wait");
+            email.execute(message,args);
         }
     }
 }
