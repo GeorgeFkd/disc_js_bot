@@ -84,7 +84,7 @@ function addRulesInSchedule(rules,rules_info,bot){
       bot.send.get("824286927204909117").send("something went wrong");
       email.execute(`the error happened in addRulesInSchedule \n${err}`,[])
     }
-  }
+}
 
   function addJob(curr_rule,curr_info,bot){
     

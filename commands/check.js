@@ -7,6 +7,3 @@ module.exports = {
         message.reply("this doesnt do anything it is for test purposes")
     }
 }
-function getContent(content){
-    return content;
-}

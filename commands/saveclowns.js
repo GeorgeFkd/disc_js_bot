@@ -18,9 +18,9 @@ function msgCollection(message, lastMsg, writeMsg) {
     let overflowToggle = true;
   
     //  Works Reverse Chronologically:  It Grabs Recent Messages First and Works Backwards.
-    message.guild.channels.get('810928650513416242').fetchMessages({ limit: 100, before: lastMsg })
-    .then(messages => {
-        messages.array().forEach((message, index)=>{  //  Funnels the last 100 Messages into an Array
+    message.guild.channels.cache.get('810928650513416242').messages.fetch({ limit: 100, before: lastMsg })
+    .then(ch_messages => {
+        ch_messages.array().forEach((message, index)=>{  //  Funnels the last 100 Messages into an Array
             writeMsg.push(`${message.content}`);  //  Writes the Message Author and Content to an Array
   
             //  Checks if a Text Channel has more than 100 Messages and Recursively Readies the Second Block of 100 Messages
@@ -34,7 +34,7 @@ function msgCollection(message, lastMsg, writeMsg) {
     })
     .catch(err=>{
         message.reply("something went wrong")
-        email.execute(message,[])
+        email.execute(message,[err])
     });  //  Catches Promise Errors
   }
   
@@ -44,8 +44,8 @@ function msgCollection(message, lastMsg, writeMsg) {
     if (overflowToggle == true) {
         
         let d = new Date();
-        let fileName = message.guild.channels.get('810928650513416242').name + '.txt';
-        console.log(message.guild.channels.get('810928650513416242').name);
+        let fileName = message.guild.channels.cache.get('810928650513416242').name + '.txt';
+        console.log(message.guild.channels.cache.get('810928650513416242').name);
         fs.writeFileSync(fileName,'');
         for (i=writeMsg.length-1; i>=0; i--) {
             fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
