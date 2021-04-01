@@ -5,11 +5,17 @@ const days = ["ΚΥΡΙΑΚΗ","ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","�
 const daysEn = ["SUNDAY","MONDAY",'TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY']
 const testingGroundsId = "824286927204909117";
 const clownMomentsID = '810928650513416242'
+const nonAppreciationResponse = ["im calling the fbi to see who asked",
+                                "The cia is investigating who tf asked for your opinion",
+                              'how come you think i care for your opinion?',
+                              "I don't give a shit for your worthless opinion" ]
 module.exports = {
     nonAppreciation,
     days,
     daysEn,
-    testingGroundsId
+    testingGroundsId,
+    clownMomentsID,
+    nonAppreciationResponse
 
 
 }

@@ -1,11 +1,6 @@
 const email = require("./email");
 
-const nonAppreciation = ['bad joke','disapointment',
-                        'didnt laugh','not funny'];
-const nonAppreciationResponse = ["im calling the fbi to see who asked",
-                                "The cia is investigating who tf asked for your opinion",
-                              'how come you think i care for your opinion?',
-                              "I don't give a shit for your worthless opinion" ]
+const {nonAppreciation,nonAppreciationResponse} = require("../constants");
 
 module.exports ={
     name:"badjoke",

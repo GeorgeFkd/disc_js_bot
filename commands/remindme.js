@@ -1,6 +1,6 @@
 const schedule = require("node-schedule");
 
-const {days,daysEn} = require("constants");
+const {days,daysEn} = require("../constants");
 
 
 module.exports = {

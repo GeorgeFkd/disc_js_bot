@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 const email = require("./email");
-const {clownMomentsID}= require("constants");
+const {clownMomentsID}= require("../constants");
 module.exports = {
     name:"saveclowns",
     description:"saves the contents of the clown text channel",
