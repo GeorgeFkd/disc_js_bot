@@ -8,7 +8,7 @@ module.exports = {
     execute(message,args){
         console.log(args.length);
         //δυο δομες : ωρα και μηνυμα και ωρα μηνυμα και μερα
-        //console.log(args[2]);
+        //TODO NA GINEI REFACTOR EDW
         const [hour,minutes] = args[0].split(".");
         let mydate,mymsg;
         if(args.length == 2) {
