@@ -1,6 +1,7 @@
 const schedule = require("node-schedule");
-const days = ["ΚΥΡΙΑΚΗ","ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ","ΣΑΒΒΑΤΟ"];
-const daysEn = ["SUNDAY","MONDAY",'TUESDAY','WEDNESDAY','THURSDAY',]
+
+const {days,daysEn} = require("constants");
+
 
 module.exports = {
     name:"remindme",
@@ -11,40 +12,40 @@ module.exports = {
         //console.log(args[2]);
         const [hour,minutes] = args[0].split(".");
         let mydate,mymsg;
-        if(args.length == 2) {
-            mydate = new Date(); 
-            mymsg = args.slice(1).join(" ");         
-        } else if(args.length == 3){
-            //2 cases :day specified is before and after or in one week
-            const day = args[-1].toUpperCase();
-            let index ;
-            mymsg = args.slice(1,args.length-1).join(" ");
-            if(days.includes(day)){
-                index = days.indexOf(day);
-            }else if(daysEn.includes(day)){
-                index = daysEn.indexOf(day);
-            }else{
-                message.author.send("You didnt give me a proper to day to work with");
-                throw Error;
-            }
-            let today = new Date().getDay();
-            let datediff;
-            if(index>today){
-                datediff = index-today;
-            }else{
-                let i=0;
-                //prwth ylopoihsh
-                while(index!=today){
-                    today++;
-                    today = today%7;
-                    i++;
+        switch(args.length){
+            case 2:
+                mydate = new Date(); 
+                mymsg = args.slice(1).join(" ");   
+                break;
+            case 3:
+                const day = args[-1].toUpperCase();
+                let index ;
+                mymsg = args.slice(1,args.length-1).join(" ");
+                if(days.includes(day)){
+                    index = days.indexOf(day);
+                }else if(daysEn.includes(day)){
+                    index = daysEn.indexOf(day);
+                }else{
+                    message.author.send("You didnt give me a proper to day to work with");
+                    throw Error;
                 }
-                datediff = i;
-            }
-
-            mydate = new Date();
-            mydate = mydate.addDays(datediff);
-            
+                let today = new Date().getDay();
+                let datediff;
+                if(index>today){
+                    datediff = index-today;
+                }else if (index<today){
+                    let i=0;
+                    //prwth ylopoihsh
+                    while(index!=today){
+                        today++;
+                        today = today%7;
+                        i++;
+                    }
+                }else if (index === today){
+                    datediff = 7;
+                }
+                    datediff = i;
+                    break;
         }
 
         mydate.setUTCSeconds(0);
