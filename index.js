@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const {prefix,token:TOKEN} = require('./config.json');
 bot.commands = new Discord.Collection();
-
+const {nonAppreciation} = require("constants");
 
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
@@ -14,8 +14,7 @@ for(const file of commandFiles){
   const command = require(`./commands/${file}`);
   bot.commands.set(command.name,command);
 }
-const nonAppreciation = ['bad joke','disapointment',
-                        'didnt laugh','not funny'];
+
 
 
 bot.login(TOKEN);
@@ -23,6 +22,7 @@ bot.login(TOKEN);
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
   const filename = 'program.txt';
+  console.log(bot);
   bot.commands.get("setupschedule").execute(filename,bot);
 });
 

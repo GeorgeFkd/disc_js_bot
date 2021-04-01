@@ -3,11 +3,13 @@ const fs = require('fs');
 const schedule = require("node-schedule");
 const readline = require('readline');
 const email = require("./email");
-const days = ["ΚΥΡΙΑΚΗ","ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","ΠΕΜΠΤΗ","ΠΑΡΑΣΚΕΥΗ","ΣΑΒΒΑΤΟ"];
-let reminders = [];
+const {days,testingGroundsID} = require("../constants");
+console.log(days,"days are");
 
-function createRules(reminders){
+
+function createRules(reminders,bot){
     //reminder:{course:,teacher:,day:,start:,end:,,link}
+
     let rules = [];
     let rules_info = [];
     try {
@@ -26,7 +28,7 @@ function createRules(reminders){
         
       }
     } catch (err) {
-      bot.send.get("824286927204909117").send("something went wrong");
+      bot.send.get(testingGroundsID).send("something went wrong");
       email.execute(`the error happened in createRules \n${err}`,[])
     }
     return [rules,rules_info];
@@ -35,6 +37,7 @@ function createRules(reminders){
   
 function readScheduleFile(filename,bot){
 //file pattern e.g.Αρχιτεκτονική Υπολογιστών|Ρουμελιώτης|ΔΕΥΤΕΡΑ|15.00|18.00|https://zoom.us/j/91923215916
+    let reminders = [];
     const readInterface = readline.createInterface({
         input:fs.createReadStream(filename),
         output:process.stdout,
@@ -42,10 +45,7 @@ function readScheduleFile(filename,bot){
     })
     try {
       readInterface.on('line',function(line){
-          let mylineelems = line.split("|");
-          if(!reminders) {
-              let reminders =[];
-          }
+          let mylineelems = line.split("|");          
           let reminder = {course:"",teacher:"",day:"",start:"",end:"",link:""};
           
           reminder.course = mylineelems[0];
@@ -57,11 +57,11 @@ function readScheduleFile(filename,bot){
           reminders.push(reminder);
   
       }).on('close',function(line){
-          const [rules,rules_info] = createRules(reminders);
+          const [rules,rules_info] = createRules(reminders,bot);
           addRulesInSchedule(rules,rules_info,bot)
       });
     } catch (err) {
-      bot.send.get("824286927204909117").send("something went wrong");
+      bot.send.get(testingGroundsID).send("something went wrong");
       email.execute(`the error happened in readScheduleFile \n${err}`,[])
     }
 
@@ -81,7 +81,7 @@ function addRulesInSchedule(rules,rules_info,bot){
         addJob(curr_rule,curr_info,bot);
       }
     } catch (err) {
-      bot.send.get("824286927204909117").send("something went wrong");
+      bot.send.get(testingGroundsID).send("something went wrong");
       email.execute(`the error happened in addRulesInSchedule \n${err}`,[])
     }
 }
@@ -91,7 +91,7 @@ function addRulesInSchedule(rules,rules_info,bot){
     try {
       const job = schedule.scheduleJob(curr_rule,function(){
           
-          bot.channels.get("824286927204909117").send(
+          bot.channels.get(testingGroundsID).send(
             curr_info.course+'\n'+
             curr_info.teacher+'\n'+
             curr_info.link+'\n'
@@ -99,7 +99,7 @@ function addRulesInSchedule(rules,rules_info,bot){
   
         });
     } catch (err) {
-      bot.send.get("824286927204909117").send("something went wrong");
+      bot.send.get(testingGroundsID).send("something went wrong");
       email.execute(`the error happened in addJob \n${err}`,[])
     }
   }
@@ -113,7 +113,7 @@ module.exports={
     name:"setupschedule",
     description:"gets data from a file and initializes the rules",
     execute(filename,bot){
-        initialiseScheduleJobs(filename,bot)
+      initialiseScheduleJobs(filename,bot)
 
     }
 

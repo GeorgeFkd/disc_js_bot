@@ -1,6 +1,7 @@
 
 const fs = require("fs");
 const email = require("./email");
+const {clownMomentsID}= require("constants");
 module.exports = {
     name:"saveclowns",
     description:"saves the contents of the clown text channel",
@@ -18,7 +19,7 @@ function msgCollection(message, lastMsg, writeMsg) {
     let overflowToggle = true;
   
     //  Works Reverse Chronologically:  It Grabs Recent Messages First and Works Backwards.
-    message.guild.channels.cache.get('810928650513416242').messages.fetch({ limit: 100, before: lastMsg })
+    message.guild.channels.cache.get(clownMomentsID).messages.fetch({ limit: 100, before: lastMsg })
     .then(ch_messages => {
         ch_messages.array().forEach((message, index)=>{  //  Funnels the last 100 Messages into an Array
             writeMsg.push(`${message.content}`);  //  Writes the Message Author and Content to an Array
@@ -44,8 +45,8 @@ function msgCollection(message, lastMsg, writeMsg) {
     if (overflowToggle == true) {
         
         let d = new Date();
-        let fileName = message.guild.channels.cache.get('810928650513416242').name + '.txt';
-        console.log(message.guild.channels.cache.get('810928650513416242').name);
+        let fileName = message.guild.channels.cache.get(clownMomentsID).name + '.txt';
+        console.log(message.guild.channels.cache.get(clownMomentsID).name);
         fs.writeFileSync(fileName,'');
         for (i=writeMsg.length-1; i>=0; i--) {
             fs.appendFile(fileName, `${writeMsg[i]} \n`, (err) => {
