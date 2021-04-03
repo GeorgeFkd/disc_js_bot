@@ -23,7 +23,7 @@ bot.on('ready', () => {
   const filename = 'program.txt';
   console.log(bot);
   bot.commands.get("setupschedule").execute(filename,bot);
-
+  
 });
 
 bot.on('message', async message => {
