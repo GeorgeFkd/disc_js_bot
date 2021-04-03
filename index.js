@@ -5,7 +5,8 @@ const bot = new Discord.Client();
 const {prefix,token:TOKEN} = require('./config.json');
 bot.commands = new Discord.Collection();
 const {nonAppreciation,needsBotAsArgs} = require("./constants");
-const poll = require('./commands/poll');
+const welcome = require('./welcome');
+
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
 
@@ -23,7 +24,7 @@ bot.on('ready', () => {
   const filename = 'program.txt';
   console.log(bot);
   bot.commands.get("setupschedule").execute(filename,bot);
-  
+  welcome(bot);
 });
 
 bot.on('message', async message => {
