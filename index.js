@@ -40,7 +40,9 @@ bot.on('message', async message => {
   }else{
     command = bot.commands.get(commandName);
   }
-   
+  if(needsBotAsArgs.includes(commandName)){
+    args = bot;
+  }
   try{
     command.execute(message,args)
   }catch(e){

@@ -9,7 +9,7 @@ const nonAppreciationResponse = ["im calling the fbi to see who asked",
                                 "The cia is investigating who tf asked for your opinion",
                               'how come you think i care for your opinion?',
                               "I don't give a shit for your worthless opinion" ]
-const needsBotAsArgs = [];
+const needsBotAsArgs = ['help'];
 module.exports = {
     nonAppreciation,
     days,
