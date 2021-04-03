@@ -23,8 +23,7 @@ module.exports = {
         const theCategory = server.channels.cache.find(c=> c.name == "📝current"
         && c.type =="category");
         console.log(theChannel,theCategory);
-        theChannel.setParent(theCategory.id).then(()=>console.log("all ok"));
-        //there is a permissions problem with this 
+        theChannel.setParent(theCategory.id).then(()=>console.log("all ok"));         
         
 
     }
