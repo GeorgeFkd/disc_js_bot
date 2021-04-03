@@ -6,7 +6,7 @@ const {prefix,token:TOKEN} = require('./config.json');
 bot.commands = new Discord.Collection();
 const {nonAppreciation,needsBotAsArgs} = require("./constants");
 const welcome = require('./welcome');
-
+const SchSetup = require("./setupschedule");
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
 
@@ -21,9 +21,10 @@ bot.login(TOKEN);
 
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
+  
   const filename = 'program.txt';
-  console.log(bot);
-  bot.commands.get("setupschedule").execute(filename,bot);
+  SchSetup.execute(filename,bot);
+  
   welcome(bot);
 });
 

@@ -13,38 +13,11 @@ module.exports = {
         const [hour,minutes] = args[0].split(".");
         let mydate,mymsg= args.slice(1).join(" ");;
         
-        //     case 3:
-        //         const day = args[-1].toUpperCase();
-        //         let index ;
-        //         mymsg = args.slice(1,args.length-1).join(" ");
-        //         if(days.includes(day)){
-        //             index = days.indexOf(day);
-        //         }else if(daysEn.includes(day)){
-        //             index = daysEn.indexOf(day);
-        //         }else{
-        //             message.author.send("You didnt give me a proper to day to work with");
-        //             throw Error;
-        //         }
-        //         let today = new Date().getDay();
-        //         let datediff;
-        //         if(index>today){
-        //             datediff = index-today;
-        //         }else if (index<today){
-        //             let i=0;
-        //             //prwth ylopoihsh
-        //             while(index!=today){
-        //                 today++;
-        //                 today = today%7;
-        //                 i++;
-        //             }
-        //         }else if (index === today){
-        //             datediff = 7;
-        //         }
-        //             datediff = i;
-        //             break;
-        // }
-
-        const job = schedule.scheduleJob({hour:hour,minute:minutes,dayOfWeek:new Date().getDay()},function(){
+        const date = new Date()
+        const utcdate = new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()))//.getDay();
+        day = utcdate.getUTCDay();
+        console.log(day,utcdate,"good ole",date);
+        const job = schedule.scheduleJob({hour:hour,minute:minutes,dayOfWeek:day},function(){
             message.author.send(`your reminder you irresponsible asshat : ${mymsg}`);
         })
         job.isOneTimeJob = true;

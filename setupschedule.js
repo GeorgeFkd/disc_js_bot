@@ -2,8 +2,8 @@
 const fs = require('fs');
 const schedule = require("node-schedule");
 const readline = require('readline');
-const email = require("./email");
-const {days,testingGroundsID} = require("../constants");
+const email = require("./commands/email");
+const {days,testingGroundsID} = require("./constants");
 console.log(days,"days are");
 
 
