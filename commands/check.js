@@ -5,5 +5,6 @@ module.exports = {
     thedata:[],
     execute(message,args){
         message.reply("this doesnt do anything it is for test purposes")
+        
     }
 }
