@@ -4,11 +4,10 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const {prefix,token:TOKEN} = require('./config.json');
 bot.commands = new Discord.Collection();
-const {nonAppreciation} = require("./constants");
-
+const {nonAppreciation,needsBotAsArgs} = require("./constants");
+const poll = require('./commands/poll');
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
-
 
 for(const file of commandFiles){
   const command = require(`./commands/${file}`);
@@ -24,6 +23,7 @@ bot.on('ready', () => {
   const filename = 'program.txt';
   console.log(bot);
   bot.commands.get("setupschedule").execute(filename,bot);
+
 });
 
 bot.on('message', async message => {
@@ -31,7 +31,7 @@ bot.on('message', async message => {
 
   const isInsult = nonAppreciation.includes(message.content); 
   if ((!message.content.startsWith(prefix) || message.author.bot)&& !isInsult) return;
-  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  let args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
   let command;
   if(isInsult){
@@ -40,7 +40,6 @@ bot.on('message', async message => {
     command = bot.commands.get(commandName);
   }
    
-  
   try{
     command.execute(message,args)
   }catch(e){
@@ -50,5 +49,6 @@ bot.on('message', async message => {
   
 
 })
+
 
 

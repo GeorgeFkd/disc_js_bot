@@ -47,7 +47,7 @@ module.exports = {
                     datediff = i;
                     break;
         }
-
+        //bug that has to do with time zones utc+3 is greece
         mydate.setUTCSeconds(0);
         mydate.setUTCMinutes(minutes);
         mydate.setUTCHours(hour);
@@ -59,7 +59,7 @@ module.exports = {
         mydate.getUTCHours(),mydate.getUTCMinutes(),
         mydate.getUTCSeconds())
         console.log(theFinalDate);
-        //It works 
+        //It works only locally 
         const job = schedule.scheduleJob(theFinalDate,function(){
             message.author.send(`your reminder you irresponsible asshat : ${mymsg}`);
         })
