@@ -9,7 +9,8 @@ const nonAppreciationResponse = ["im calling the fbi to see who asked",
                                 "The cia is investigating who tf asked for your opinion",
                               'how come you think i care for your opinion?',
                               "I don't give a shit for your worthless opinion" ]
-const needsBotAsArgs = ['help'];
+const needsBotAsArgs = ['help','snipe'];
+const calcoholicsGuildID = "767468807328628776";
 module.exports = {
     nonAppreciation,
     days,
@@ -17,7 +18,8 @@ module.exports = {
     testingGroundsId,
     clownMomentsID,
     nonAppreciationResponse,
-    needsBotAsArgs
+    needsBotAsArgs,
+    calcoholicsGuildID
 
 
 }

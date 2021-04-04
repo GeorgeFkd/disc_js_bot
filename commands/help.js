@@ -3,7 +3,8 @@ module.exports = {
     name:"help",
     description:"Shows the user all the available commands and their functionality",
     execute(message,args){
-        const theBot = args;
+        console.log(args);
+        const theBot = args[-1];
         console.log(theBot.commands.get("badjoke"));
         let msg ='';
         for(const command of theBot.commands){

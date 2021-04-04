@@ -10,6 +10,9 @@ const SchSetup = require("./setupschedule");
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
 
+
+bot.snipes = [];
+
 for(const file of commandFiles){
   const command = require(`./commands/${file}`);
   bot.commands.set(command.name,command);
@@ -42,7 +45,9 @@ bot.on('message', async message => {
     command = bot.commands.get(commandName);
   }
   if(needsBotAsArgs.includes(commandName)){
-    args = bot;
+    console.log(args,'the args')
+    args.push(bot)
+    console.log(args);
   }
   try{
     command.execute(message,args)
@@ -53,6 +58,18 @@ bot.on('message', async message => {
   
 
 })
+
+bot.on("messageDelete",async msg =>{
+  const { id , content,author} = msg;
+  console.log(id,content,author);
+  let snipeObj = new Object();
+  snipeObj.name = author.username;
+  snipeObj.content = content;
+
+  bot.snipes.push(snipeObj);
+})
+
+
 
 
 
