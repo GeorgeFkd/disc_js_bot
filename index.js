@@ -9,7 +9,7 @@ const welcome = require('./welcome');
 const SchSetup = require("./setupschedule");
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
-
+const {setReminders} = require("./water_reminder");
 
 bot.snipes = [];
 
@@ -27,7 +27,7 @@ bot.on('ready', () => {
   
   const filename = 'program.txt';
   SchSetup.execute(filename,bot);
-  
+  setReminders(bot);
   welcome(bot);
 });
 

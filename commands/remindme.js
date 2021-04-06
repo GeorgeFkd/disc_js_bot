@@ -17,7 +17,7 @@ module.exports = {
         const utcdate = new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()))//.getDay();
         day = utcdate.getUTCDay();
         console.log(day,utcdate,"good ole",date);
-        const job = schedule.scheduleJob({hour:hour,minute:minutes,dayOfWeek:day},function(){
+        const job = schedule.scheduleJob({hour:hour,minute:minutes,dayOfWeek:day,tz:"Etc/GMT-3"},function(){
             message.author.send(`your reminder you irresponsible asshat : ${mymsg}`);
         })
         job.isOneTimeJob = true;
