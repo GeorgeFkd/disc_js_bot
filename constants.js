@@ -5,6 +5,7 @@ const days = ["ΚΥΡΙΑΚΗ","ΔΕΥΤΕΡΑ","ΤΡΙΤΗ","ΤΕΤΑΡΤΗ","�
 const daysEn = ["SUNDAY","MONDAY",'TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY']
 const testingGroundsId = "824286927204909117";
 const testingGroundsIDv2 = "829025431029940284";
+const remindersID = "829032389262442516";
 const clownMomentsID = '810928650513416242'
 const nonAppreciationResponse = ["im calling the fbi to see who asked",
                                 "The cia is investigating who tf asked for your opinion",
@@ -16,14 +17,6 @@ const calcoholicsGuildID = "767468807328628776";
 const waterReminders = [{
     hour:19,
     minute:30,
-    tz:'Etc/GMT-3'
-},{
-    hour:19,
-    minute:28,
-    tz:'Etc/GMT-3'
-},{
-    hour:19,
-    minute:31,
     tz:'Etc/GMT-3'
 },{
     hour:4,
@@ -49,7 +42,11 @@ const waterReminders = [{
     hour:6,
     minute:0,
     tz:'Etc/GMT-3'
-},
+},{
+    hour:22,
+    minute:10,
+    tz:'Etc/GMT-3'
+}
 ]
 module.exports = {
     nonAppreciation,

@@ -9,7 +9,7 @@ console.log(days,"days are");
 
 function createRules(reminders,bot){
     //reminder:{course:,teacher:,day:,start:,end:,,link}
-
+    //TODO NEEDS REFACTOR
     let rules = [];
     let rules_info = [];
     try {
@@ -20,6 +20,7 @@ function createRules(reminders,bot){
         rule.hour = hour
         rule.minute = minutes;
         rule.dayOfWeek = days.indexOf(day);
+        rule.tz = 'Etc/GMT-3'
         rules.push(rule);
         let current_info = {};
         current_info.course = course;current_info.teacher = teacher;

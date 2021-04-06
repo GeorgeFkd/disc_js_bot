@@ -8,6 +8,7 @@ function setReminders(bot){
     console.log(theChannel,waterReminders);
     let job;
     try {
+        //TODO NEEDS REFACTOR ,ANYTHING JOB RELATED
         console.log("naughty for");
         for (let reminder of waterReminders) {
             const rule = new schedule.RecurrenceRule();
