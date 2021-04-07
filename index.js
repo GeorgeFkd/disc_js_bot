@@ -13,7 +13,8 @@ const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
 const {setWaterReminders} = require("./water_reminder");
 const {calcoholicsGuildID,remindmeplsRoleID} = require("./constants")
-
+global.XP = new Collection();
+new Collection();
 
 
 bot.snipes = [];
@@ -35,7 +36,23 @@ bot.on('ready', async () => {
   courses_reminders(filename,bot);
   setWaterReminders(bot);
   welcome(bot);
+  //initialize the xp
+  {
+    const members = bot.users.cache;
+    const membersID = Array.from(members.keys())
+    console.log(membersID);
+    membersID.map((id)=>{
+      XP.set(id,0);
+    })
+
+    console.log(XP);
+  }
 });
+
+function initializeXP(){
+
+}
+
 
 bot.on('message', async message => {
   if(message.content==="reset")resetBot(message.channel);
@@ -75,6 +92,8 @@ bot.on("messageDelete",async msg =>{
   bot.snipes.push(snipeObj);
 })
 
+
+module.exports ={XP}
 
 
 
