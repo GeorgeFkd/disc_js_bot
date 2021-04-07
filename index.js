@@ -32,8 +32,8 @@ bot.on('ready', async () => {
   
   const filename = 'program.txt';
   //both work properly
-  // courses_reminders(filename,bot);
-  // setWaterReminders(bot);
+  courses_reminders(filename,bot);
+  setWaterReminders(bot);
   welcome(bot);
 });
 
