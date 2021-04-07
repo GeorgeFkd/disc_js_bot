@@ -29,22 +29,10 @@ bot.login(TOKEN);
 
 bot.on('ready', async () => {
   console.info(`Logged in as ${bot.user.tag}!`);
-  // const forWaterReminderMembers = bot.guilds.cache.get(calcoholicsGuildID)
-  // .members.cache.
-  // filter(user=>user._roles.includes(remindmeplsRoleID));
-  // console.log(forWaterReminderMembers);
-  // const ids = forWaterReminderMembers.map(m=>m.id)
-  // console.log(ids);
-  // console.log()
-  //console.log(bot.guilds.get(calcoholicsGuildID).members.cache.filter(user=>user._roles.includes(remindmeplsRoleID)))
-  // try {
-  //   const art = await bot.users.fetch('767060668847226932');
-  //   console.log(art);
-  // } catch (err) {
-  //   console.log(err)
-  // }
+  
   const filename = 'program.txt';
-  // courses_reminders(filename,bot);
+  //both work properly
+  //courses_reminders(filename,bot);
   //setWaterReminders(bot);
   welcome(bot);
 });

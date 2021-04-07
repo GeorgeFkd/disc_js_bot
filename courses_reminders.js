@@ -3,40 +3,11 @@ const fs = require('fs');
 const schedule = require("node-schedule");
 const readline = require('readline');
 const email = require("./commands/email");
-const {days,testingGroundsID,greeceTimeZone} = require("./constants");
+const {days,testingGroundsID,greeceTimeZone,calcoholicsGuildID,testingGroundsIDv2,remindersID} = require("./constants");
 console.log(days,"days are");
-
-
-function createRules(reminders,bot){
-    //reminder:{course:,teacher:,day:,start:,end:,,link}
-    //TODO NEEDS REFACTOR
-    let rules = [];
-    let rules_info = [];
-    try {
-      for(let reminder of reminders){
-        const {course,teacher,start,end,link,day} = reminder;
-        const rule = new schedule.RecurrenceRule();
-        let [hour,minutes] = start.split(".");
-        rule.hour = hour
-        rule.minute = minutes;
-        rule.dayOfWeek = days.indexOf(day);
-        rule.tz = greeceTimeZone;
-        rules.push(rule);
-        let current_info = {};
-        current_info.course = course;current_info.teacher = teacher;
-        current_info.end = end;current_info.link = link; 
-        rules_info.push(current_info);
-        
-      }
-    } catch (err) {
-      bot.send.get(testingGroundsID).send("something went wrong");
-      email.execute(`the error happened in createRules \n${err}`,[])
-    }
-    return [rules,rules_info];
+const {CourseReminder} = require("./reminders");
   
-  }
-  
-function readScheduleFile(filename,bot){
+function setCourseReminders(filename,bot){
 //file pattern e.g.Αρχιτεκτονική Υπολογιστών|Ρουμελιώτης|ΔΕΥΤΕΡΑ|15.00|18.00|https://zoom.us/j/91923215916
     let reminders = [];
     const readInterface = readline.createInterface({
@@ -45,69 +16,32 @@ function readScheduleFile(filename,bot){
         console:false
     })
     try {
-      readInterface.on('line',function(line){
-          let mylineelems = line.split("|");          
-          let reminder = {course:"",teacher:"",day:"",start:"",end:"",link:""};
-          
-          reminder.course = mylineelems[0];
-          reminder.teacher = mylineelems[1];
-          reminder.day = mylineelems[2];
-          reminder.start = mylineelems[3];
-          reminder.end = mylineelems[4];
-          reminder.link = mylineelems[5];
-          reminders.push(reminder);
+    readInterface.on('line',function(line){
+      let mylineelems = line.split("|");          
+      let[course,teacher,day,start,end,link]=mylineelems;
+      const [hour,minute] = start.split('.')
+      const dayIndex = days.indexOf(days)//TODO na to ftiaksw na dexetai agglika
+      const reminder = new CourseReminder(hour,minute,greeceTimeZone,
+                                    course,teacher,link,dayIndex,end)
+      reminders.push(reminder);
   
       }).on('close',function(line){
-          const [rules,rules_info] = createRules(reminders,bot);
-          addRulesInSchedule(rules,rules_info,bot)
+          const theChannel = bot.channels.cache.get(remindersID);
+          reminders.map((reminder)=>setUpReminder(reminder,theChannel,''))
+          //xwris mention einai ta courseReminders προς το παρον τουλαχιστον
       });
     } catch (err) {
-      bot.send.get(testingGroundsID).send("something went wrong");
+      bot.channels.cache.get(testingGroundsID).send("something went wrong");
       email.execute(`the error happened in readScheduleFile \n${err}`,[])
     }
 
     
 }
-function addRulesInSchedule(rules,rules_info,bot){
-    let i,curr_info,curr_rule;
-    console.log(rules);
-    console.log("in addrules",rules.length);
-    
-    try {
-      for(i=0;i<rules.length;i++){
-  
-        curr_rule = rules[i];
-        curr_info = rules_info[i];
-        
-        addJob(curr_rule,curr_info,bot);
-      }
-    } catch (err) {
-      bot.send.get(testingGroundsID).send("something went wrong");
-      email.execute(`the error happened in addRulesInSchedule \n${err}`,[])
-    }
-}
+function setUpReminder(reminder,theChannel,mentions){
+  //IT WORKS 
+  reminder.setMentions(mentions)
+  reminder.setReminderMessage()
+  reminder.setReminder(theChannel);
+}  
 
-  function addJob(curr_rule,curr_info,bot){
-    
-    try {
-      const job = schedule.scheduleJob(curr_rule,function(){
-          
-          bot.channels.get(testingGroundsID).send(
-            curr_info.course+'\n'+
-            curr_info.teacher+'\n'+
-            curr_info.link+'\n'
-            )
-  
-        });
-    } catch (err) {
-      bot.send.get(testingGroundsID).send("something went wrong");
-      email.execute(`the error happened in addJob \n${err}`,[])
-    }
-  }
-  
-  
-  function initialiseScheduleJobs(filename,bot){
-    readScheduleFile(filename,bot);  
-  }
-
-module.exports=initialiseScheduleJobs;
+module.exports=setCourseReminders;

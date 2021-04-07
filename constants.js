@@ -52,7 +52,7 @@ module.exports = {
     remindersID,
     greeceTimeZone,
     remindmeplsRoleID,
-    addReminder,messageForWater
+    addReminder,messageForWater,testingGroundsIDv2
 
 
 }
