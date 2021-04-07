@@ -12,22 +12,23 @@ const nonAppreciationResponse = ["im calling the fbi to see who asked",
                                 "The cia is investigating who tf asked for your opinion",
                               'how come you think i care for your opinion?',
                               "I don't give a shit for your worthless opinion" ]
-const needsBotAsArgs = ['help','snipe','morewater'];
+const needsBotAsArgs = ['help','snipe','morewater','check'];
 const calcoholicsGuildID = "767468807328628776";
 const greeceTimeZone = 'Etc/GMT-3'
 const remindmeplsRoleID = "829034225499897856"
-const Reminder = require("./reminders");
+const {WaterReminder} = require("./reminders");
+const messageForWater = "Being dead inside is not an excuse for not drinking water"
 let waterReminders = [
-    new Reminder(19,30,greeceTimeZone),
-    new Reminder(4,10,greeceTimeZone),
-    new Reminder(3,0,greeceTimeZone),
-    new Reminder(1,10,greeceTimeZone),
-    new Reminder(23,30,greeceTimeZone),
-    new Reminder(5,0,greeceTimeZone),
-    new Reminder(6,0,greeceTimeZone),
-    new Reminder(22,10,greeceTimeZone),
-    new Reminder(15,30,greeceTimeZone),
-    new Reminder(12,30,greeceTimeZone),
+    new WaterReminder(19,30,greeceTimeZone,messageForWater),
+    new WaterReminder(4,10,greeceTimeZone,messageForWater),
+    new WaterReminder(3,0,greeceTimeZone,messageForWater),
+    new WaterReminder(1,10,greeceTimeZone,messageForWater),
+    new WaterReminder(23,30,greeceTimeZone,messageForWater),
+    new WaterReminder(5,0,greeceTimeZone,messageForWater),
+    new WaterReminder(6,0,greeceTimeZone,messageForWater),
+    new WaterReminder(22,10,greeceTimeZone,messageForWater),
+    new WaterReminder(15,30,greeceTimeZone,messageForWater),
+    new WaterReminder(11,14,greeceTimeZone,messageForWater),
 ]
 
 
@@ -37,50 +38,7 @@ function addReminder(hour,minute){
     return reminder;
     
 }
-//TODO NA MPOYNE SE CLASS KAI ME CONSTRUCTOR NA TA FTIAXNW KAI NA XRHSIMOPOIHSW ETOIMO TO TIMEZONE
-// const waterReminders = [{
-//     hour:19,
-//     minute:30,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:4,
-//     minute:10,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:3,
-//     minute:0,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:1,
-//     minute:10,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:23,
-//     minute:30,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:5,
-//     minute:0,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:6,
-//     minute:0,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:22,
-//     minute:10,
-//     tz:'Etc/GMT-3'
-// },{
-//     hour:19,
-//     minute:58,
-//     tz:"Etc/GMT-3"
-// },{
-//     hour:0,
-//     minute:29,
-//     tz:"Etc/GMT-3"
-// },
 
-// ]
 module.exports = {
     nonAppreciation,
     days,
@@ -94,7 +52,7 @@ module.exports = {
     remindersID,
     greeceTimeZone,
     remindmeplsRoleID,
-    addReminder
+    addReminder,messageForWater
 
 
 }

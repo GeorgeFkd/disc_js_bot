@@ -45,7 +45,7 @@ bot.on('ready', async () => {
   // }
   const filename = 'program.txt';
   // courses_reminders(filename,bot);
-  setWaterReminders(bot);
+  //setWaterReminders(bot);
   welcome(bot);
 });
 

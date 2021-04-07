@@ -5,12 +5,12 @@ module.exports = {
     description:"reveals a deleted message",
     execute(message,args){
         const bot = args.pop();
+
         let username = args.join(' ')
-        let theUserSnipes = [];
-        let msg;
+        let theguildmember,msg,theUserSnipes = [];
+        
         const theGuild = bot.guilds.cache.get(calcoholicsGuildID);
         //This works
-        let theguildmember;
         
         if(!username){
             console.log('randomized')
@@ -20,7 +20,7 @@ module.exports = {
             theguildmember = theGuild.members.cache.filter(user=>user.user.username===username).first()
             console.log("not randomized");
             console.log(theguildmember)
-            //edw den moy dinei ton xrhsth
+            //this works
         }
 
         for(let snipe of bot.snipes){
