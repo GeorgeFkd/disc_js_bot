@@ -10,7 +10,7 @@ function setWaterReminders(bot){
     const forWaterReminderMembers = guild.members.cache
     .filter(user=>user._roles.includes(remindmeplsRoleID));
 
-    const mentions = forWaterReminderMembers.map(m=>`<@${m.id}`)
+    const mentions = forWaterReminderMembers.map(m=>`<@${m.id}>`)
     const theChannel = bot.channels.cache.get(remindersID);
 
     let job;

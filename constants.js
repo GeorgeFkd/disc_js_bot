@@ -20,7 +20,7 @@ const {WaterReminder} = require("./reminders");
 const messageForWater = "Being dead inside is not an excuse for not drinking water"
 const featureReacts = ['💯','👌','🙅‍♀️']
 const developerID = '366236180863385600';
-
+//TODO ΝΑ ΓΙΝΟΥΝ PROPERLY UPDATE
 const XPgains ={
     win:3,
     lose:-3,
