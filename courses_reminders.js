@@ -3,7 +3,7 @@ const fs = require('fs');
 const schedule = require("node-schedule");
 const readline = require('readline');
 const email = require("./commands/email");
-const {days,testingGroundsID} = require("./constants");
+const {days,testingGroundsID,greeceTimeZone} = require("./constants");
 console.log(days,"days are");
 
 
@@ -20,7 +20,7 @@ function createRules(reminders,bot){
         rule.hour = hour
         rule.minute = minutes;
         rule.dayOfWeek = days.indexOf(day);
-        rule.tz = 'Etc/GMT-3'
+        rule.tz = greeceTimeZone;
         rules.push(rule);
         let current_info = {};
         current_info.course = course;current_info.teacher = teacher;
@@ -110,12 +110,4 @@ function addRulesInSchedule(rules,rules_info,bot){
     readScheduleFile(filename,bot);  
   }
 
-module.exports={
-    name:"setupschedule",
-    description:"gets data from a file and initializes the rules",
-    execute(filename,bot){
-      initialiseScheduleJobs(filename,bot)
-
-    }
-
-}
+module.exports=initialiseScheduleJobs;
