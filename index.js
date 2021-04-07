@@ -14,7 +14,7 @@ const commandFiles = fs.readdirSync('./commands')
 const {setWaterReminders} = require("./water_reminder");
 const {calcoholicsGuildID,remindmeplsRoleID} = require("./constants")
 global.XP = new Collection();
-new Collection();
+
 
 
 bot.snipes = [];
