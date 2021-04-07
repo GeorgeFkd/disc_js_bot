@@ -18,6 +18,8 @@ const greeceTimeZone = 'Etc/GMT-3'
 const remindmeplsRoleID = "829034225499897856"
 const {WaterReminder} = require("./reminders");
 const messageForWater = "Being dead inside is not an excuse for not drinking water"
+const featureReacts = ['💯','👌','🙅‍♀️']
+const developerID = '366236180863385600';
 let waterReminders = [
     new WaterReminder(19,30,greeceTimeZone,messageForWater),
     new WaterReminder(4,10,greeceTimeZone,messageForWater),
@@ -52,7 +54,8 @@ module.exports = {
     remindersID,
     greeceTimeZone,
     remindmeplsRoleID,
-    addReminder,messageForWater,testingGroundsIDv2
+    addReminder,messageForWater,testingGroundsIDv2,
+    featureReacts,developerID
 
 
 }
