@@ -12,9 +12,9 @@ const courses_reminders = require("./courses_reminders");
 const commandFiles = fs.readdirSync('./commands')
 .filter(file=>file.endsWith('.js'));
 const {setWaterReminders} = require("./water_reminder");
-const {calcoholicsGuildID,remindmeplsRoleID} = require("./constants")
+const {calcoholicsGuildID,remindmeplsRoleID,clownMomentsID} = require("./constants")
 global.XP = new Collection();
-
+const saveThatClown = require('./utilities/saveclowns')
 
 
 bot.snipes = [];
@@ -56,7 +56,11 @@ function initializeXP(){
 
 bot.on('message', async message => {
   if(message.content==="reset")resetBot(message.channel);
-
+  //TODO να το κανω με node-schedule Μια φορα την βδομαδα να μαζευει τα μυνηματα
+  //TODO KAI NA ΦΥΓΕΙ ΑΥΤΟ ΕΔΩ ΚΑΤΩ 
+  if(message.channel.id ===clownMomentsID){
+    saveThatClown(message.content);
+  }
   const isInsult = nonAppreciation.includes(message.content); 
   if ((!message.content.startsWith(prefix) || message.author.bot)&& !isInsult) return;
   let args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -67,6 +71,9 @@ bot.on('message', async message => {
   }else{
     command = bot.commands.get(commandName);
   }
+
+  
+
   if(needsBotAsArgs.includes(commandName)){
     console.log(args,'the args')
     args.push(bot)
