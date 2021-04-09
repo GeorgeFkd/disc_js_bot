@@ -18,7 +18,7 @@ const saveThatClown = require('./utilities/saveclowns')
 const cooldowns = new Map();//'command name ','new disc collection'
 
 
-bot.snipes = [];
+bot.snipes = new Collection();
 
 for(const file of commandFiles){
   const command = require(`./commands/${file}`);
@@ -41,18 +41,13 @@ bot.on('ready', async () => {
   {
     const members = bot.users.cache;
     const membersID = Array.from(members.keys())
-    console.log(membersID);
     membersID.map((id)=>{
       XP.set(id,0);
     })
-
-    console.log(XP);
   }
 });
 
-function initializeXP(){
 
-}
 
 
 bot.on('message', async message => {
@@ -112,18 +107,22 @@ bot.on('message', async message => {
 
 })
 
-bot.on("messageDelete",async msg =>{
-  const { id , content,author} = msg;
-  console.log(id,content,author);
-  let snipeObj = {};
-  snipeObj.name = author.username;
-  snipeObj.content = content;
 
-  bot.snipes.push(snipeObj);
+bot.on('messageDelete',async msg =>{
+  const {content,author} = msg;
+  console.log(content,author)
+  if(!bot.snipes.has(author.id)){
+    bot.snipes.set(author.id,[])
+  }
+  bot.snipes.get(author.id).push(content)
+  const allsnipes = bot.snipes.get(author.id);
+
+  bot.snipes.set(author.id,allsnipes)
+  
 })
 
 
-module.exports ={XP}
+module.exports ={XP}//TODO ΠΑΙΖΕΙ ΝΑ ΕΙΝΑΙ ΑΧΡΗΣΤΟ ΑΥΤΟ 
 
 
 

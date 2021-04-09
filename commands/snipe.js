@@ -2,13 +2,13 @@ const {calcoholicsGuildID} = require("../constants")
 //TODO NA BEBAIWTHW OTI DOYLEYEI
 module.exports = {
     name:"snipe",
-    cooldown: 45,
+    cooldown: 40,
     description:"reveals a deleted message",
     execute(message,args){
         const bot = args.pop();
 
         let username = args.join(' ')
-        let theguildmember,msg,theUserSnipes = [];
+        let theguildmember,msg;
         
         const theGuild = bot.guilds.cache.get(calcoholicsGuildID);
         //This works
@@ -24,17 +24,16 @@ module.exports = {
             //this works
         }
 
-        for(let snipe of bot.snipes){
-            if(username === snipe.name){
-                theUserSnipes.push(snipe.content)
-            }
-        }
-        if(theUserSnipes.length === 0){
-            msg = `he who hath not deleted shall not be sniped,${theguildmember.user.username} is innocent`
+        if(!bot.snipes.has(theguildmember.user.id)){
+            msg = `he who hath not deleted shall 
+            not be sniped,${theguildmember.user.username} is innocent`
         }else{
+            const theUserSnipes = bot.snipes.get(theguildmember.user.id);
             const randomElement = theUserSnipes[Math.floor(Math.random() * theUserSnipes.length)];
             msg = `Got yo ass ${theguildmember.user.username} ${randomElement}`;
         }
+
+        
         message.channel.send(msg);
     }
 }
