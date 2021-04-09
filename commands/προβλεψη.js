@@ -6,7 +6,7 @@ module.exports = {
     requiredRole:'πλανητάρχης',
     requiredChannels:['προβλεψεις'],
     execute(message,args){
-        console.log('Επιτελους μια προβλεψη');
+        message.channel.send('Βοηθώντας τον Κόσμο,μια πρόβλεψη την φορά συνέχισε την καλή προσπάθεια');
         const content = message.content.replace('!προβλεψη','')
         console.log(content);
 
