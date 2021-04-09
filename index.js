@@ -114,7 +114,9 @@ bot.on('message', async message => {
     //console.log(message.author,'message.author') this gives a user not a guildmember
     const theMember = message.guild.members.cache.get(message.author.id);
     const theRoles = theMember.roles.cache.map((role)=>role.name);
-    if(!theRoles.includes(command.requiredRole)){//if requiredRole = '' it is good and if theRoles is ['']
+    if(command.requiredRole === ''){
+      console.log('ima let you in')
+    }else if(!theRoles.includes(command.requiredRole)){//if requiredRole = '' it is good and if theRoles is ['']
       return message.reply(`You need the ${command.requiredRole} role to access the ${command.name} command`)
     }
     
