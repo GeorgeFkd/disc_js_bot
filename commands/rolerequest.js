@@ -4,7 +4,7 @@ module.exports = {
     name:'rolerequest',
     description:'used to request a specific role from the guild owner[but for now godgeon]',
     requiredRole:'',
-    cooldown:0,
+    cooldown:60*5,
     requiredChannels:[],//specific channel discussing this stuff
     execute(message,args){
         //there might be a more appropriate method
