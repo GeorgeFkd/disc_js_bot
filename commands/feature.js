@@ -3,6 +3,7 @@ const {featureReacts,developerID,calcoholicsGuildID} = require('../constants');
 //tha mporoysa na pairnw apo to message to guild
 module.exports = {
     name:"feature",
+    cooldown:180,
     description:"users can recommend features and get reactions from other members",
     execute(message,args){
         const addReaction = (msg,emoji)=>{

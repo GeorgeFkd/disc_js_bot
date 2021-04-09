@@ -2,6 +2,7 @@
 const nodemailer = require("nodemailer")
 module.exports = {
     name:"email",
+    cooldown:180,
     description:"sending emails for catching error occurings",
     execute(message,args){
         

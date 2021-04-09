@@ -6,6 +6,7 @@ const fs = require('fs')
 module.exports = {
     name:"check",
     description:"used for test purposes",
+    cooldown: 12,
     thedata:[],
     async execute(message,args){
         const bot = args.pop();

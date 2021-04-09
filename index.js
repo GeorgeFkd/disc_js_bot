@@ -1,7 +1,7 @@
 //TODO NA SYMMAZEPSW PANTOY OTI STATHERA YPHRXE
 const fs = require('fs');
 const schedule = require("node-schedule");
-const {Client,Intents,Collection} = require('discord.js');
+const {Client,Intents,Collection, DiscordAPIError} = require('discord.js');
 const intents = new Intents(268438528);
 const bot = new Client({ws:intents});
 const {prefix,token:TOKEN} = require('./config.json');
@@ -15,6 +15,7 @@ const {setWaterReminders} = require("./water_reminder");
 const {calcoholicsGuildID,remindmeplsRoleID,clownMomentsID} = require("./constants")
 global.XP = new Collection();
 const saveThatClown = require('./utilities/saveclowns')
+const cooldowns = new Map();//'command name ','new disc collection'
 
 
 bot.snipes = [];
@@ -66,18 +67,40 @@ bot.on('message', async message => {
   let args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
   let command;
+
+  
+
+//TODO NA BALW SE OLA TA COMMANDS COOLDOWN
+
+
+
+
   if(isInsult){
      command = bot.commands.get("badjoke");
   }else{
     command = bot.commands.get(commandName);
   }
 
-  
+  if(!cooldowns.has(command.name)){
+    cooldowns.set(command.name,new Collection())
+  }
 
+  const curr_time = Date.now();
+  const time_stamps = cooldowns.get(command.name)
+  const cooldown_amount = (command.cooldown) * 1000;
+
+  if(time_stamps.has(message.author.id)){
+    const expiration_time = time_stamps.get(message.author.id) + cooldown_amount
+    if(curr_time<expiration_time){
+      const time_left = (expiration_time-curr_time) / 1000;
+      return message.reply(`Perimene ligo re ${time_left.toFixed(1)} more seconds before using ${command.name}`)
+    }
+  }
+
+  time_stamps.set(message.author.id,curr_time)
+  setTimeout(()=> time_stamps.delete(message.author.id),cooldown_amount)
   if(needsBotAsArgs.includes(commandName)){
-    console.log(args,'the args')
     args.push(bot)
-    console.log(args);
   }
   try{
     command.execute(message,args)

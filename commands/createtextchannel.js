@@ -1,6 +1,7 @@
 const email = require("./email");
 module.exports = {
     name:"createtextchannel",
+    cooldown:25,
     description:"creates a text channel with the specified names",
     execute(message,args){
         console.log(args.join(" "));

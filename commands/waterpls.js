@@ -3,6 +3,7 @@ const { calcoholicsGuildID,remindmeplsRoleID } = require("../constants")
 
 module.exports = {
     name:"waterpls",
+    cooldown:45,
     description:"gives you the role to have reminders to drink water",
     async execute(message,args){
         console.log(message.author)

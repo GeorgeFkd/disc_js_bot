@@ -4,6 +4,7 @@ const quotes = [];
 
 module.exports = {
     name:"πλανητες",
+    cooldown:60,
     description:"Σε ενημερώνει για την ζωή σου δια μέσου των πλανητών,μόνο έγκυρες προβλέψεις",
     execute(message,args){
        

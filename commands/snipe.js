@@ -2,6 +2,7 @@ const {calcoholicsGuildID} = require("../constants")
 //TODO NA BEBAIWTHW OTI DOYLEYEI
 module.exports = {
     name:"snipe",
+    cooldown: 45,
     description:"reveals a deleted message",
     execute(message,args){
         const bot = args.pop();

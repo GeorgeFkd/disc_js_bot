@@ -10,6 +10,7 @@ const jokes = require("./give-me-a-joke");
 
 module.exports ={
     name:"joke",
+    cooldown:0,
     description:"gives a random cn joke(for now)",
     execute(message,args){
         try{jokes.getRandomCNJoke(function(joke){

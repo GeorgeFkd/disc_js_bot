@@ -3,6 +3,7 @@ const email = require("./email")
 
 module.exports = {
     name:"meme",
+    cooldown:0,
     description:"sends a random reddit meme",
     execute(message,args){
         

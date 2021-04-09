@@ -2,6 +2,7 @@
 
 module.exports = {
     name:"coin",
+    cooldown:0,
     description:"tosses a coin for your decisions",
     execute(message,args){
 

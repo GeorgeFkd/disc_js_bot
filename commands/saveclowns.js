@@ -2,8 +2,10 @@
 const fs = require("fs");
 const email = require("./email");
 const {clownMomentsID}= require("../constants");
+//THIS IS DEPRECATED
 module.exports = {
     name:"saveclowns",
+    cooldown: 25,
     description:"saves the contents of the clown text channel",
     execute(message,args){
         message.reply("currently saving them");

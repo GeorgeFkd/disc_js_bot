@@ -2,6 +2,7 @@
 
 module.exports = {
     name:"kick",
+    cooldown:120,
     description:"kicks someone",
     execute(message,args){
         try {
