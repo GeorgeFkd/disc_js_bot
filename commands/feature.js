@@ -17,7 +17,7 @@ module.exports = {
         const dev = message.guild.members.cache.get(developerID);
         console.log(message);
         dev.send(`somebody suggested:\n${args.join(' ')} message in channel${message.channel}`)
-        
+        //THIS IS HELPFUL FOR ANYTHING REQUEST RELATED
         const theLink = `https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
         dev.send(`here is a link to it ${theLink}`);
         featureReacts.map(emoji => addReaction(message,emoji))
