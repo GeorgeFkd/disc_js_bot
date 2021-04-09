@@ -8,7 +8,7 @@ module.exports = {
         const bot = args.pop();
         message.channel.send('I see you are in for a game of snipe guesser.\nI will send you a snipe and you will have to guess the username of the sender')
         //TODO ΣΙΓΟΥΡΑ ΜΠΟΡΕΙ ΝΑ ΓΙΝΕΙ ΛΙΓΟ ΚΑΛΥΤΕΡΑ refactor soon
-        
+
         const randsnipesArray = bot.snipes.random();
         console.log(randsnipesArray)
         const randSnipe = randsnipesArray[Math.floor(Math.random()*randsnipesArray.length)]
@@ -30,7 +30,7 @@ module.exports = {
         
         const themsg = message.channel.send(`The message is ${randSnipe}.Who sent it?`)
         const filter = (msg)=>msg.author.id === message.author.id;
-        const seconds = 10;
+        const seconds = 35;
         message.channel.send(`You have ${seconds} to guess `)
         message.channel.awaitMessages(filter,
             {time:seconds*1000,max:1,errors:['time']})
