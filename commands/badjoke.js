@@ -6,6 +6,7 @@ module.exports ={
     name:"badjoke",
     cooldown:0,
     requiredChannels:[],
+    requiredRole:'',
     description:"you dont appreciate my humor",
     execute(message,args){
         

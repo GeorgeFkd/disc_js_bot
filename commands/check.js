@@ -8,6 +8,7 @@ module.exports = {
     description:"used for test purposes",
     cooldown: 12,
     requiredChannels:[],
+    requiredRole:'',
     async execute(message,args){
         const bot = args.pop();
         console.log(message.channel.id)

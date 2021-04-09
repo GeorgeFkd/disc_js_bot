@@ -65,7 +65,7 @@ bot.on('message', async message => {
 
   
 
-//TODO NA BALW SE OLA TA COMMANDS COOLDOWN
+//TODO NA BRW TROPO NA EINAI PIO GENERAL KAI PIO MODULAR OI ELEGXOI
 
 
 
@@ -98,7 +98,7 @@ bot.on('message', async message => {
     setTimeout(()=> time_stamps.delete(message.author.id),cooldown_amount)
   }
 
-  { 
+  { //only channel specific commands
     //TODO ΝΑ ΒΑΛΩ ΝΑ ΔΕΙΧΝΕΙ ΜΕ ΣΥΝΔΕΣΜΟ ΤΑ ΚΑΤΑΛΛΗΛΑ ΤΣΑΝΕΛ ΠΡΕΠΕΙ ΝΑ ΒΡΩ ΤΑ ΑΝΤΙΚΕΙΜΕΝΑ ΤΥΠΟΥ ΤΣΑΝΕΛ ΚΑΙ ΝΑ ΤΑ ΒΑΛΩ ΣΤΙΣ ΑΓΚΥΛΕΣ
     if(command.requiredChannels.length ===0){//means all channels are ok
       console.log('we gucci')
@@ -107,6 +107,16 @@ bot.on('message', async message => {
       return message.reply(`The ${commandName} is not ok in the ${message.channel.name}\nTry these channels: ${command.requiredChannels.join(' ')} `)
     }
 
+    
+  }
+
+  {
+    //console.log(message.author,'message.author') this gives a user not a guildmember
+    const theMember = message.guild.members.cache.get(message.author.id);
+    const theRoles = theMember.roles.cache.map((role)=>role.name);
+    if(!theRoles.includes(command.requiredRole)){//if requiredRole = '' it is good and if theRoles is ['']
+      return message.reply(`You need the ${command.requiredRole} role to access the ${command.name} command`)
+    }
     
   }
 

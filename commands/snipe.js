@@ -4,6 +4,7 @@ module.exports = {
     name:"snipe",
     cooldown: 40,
     requiredChannels:[],
+    requiredRole:'',
     description:"reveals a deleted message",
     execute(message,args){
         const bot = args.pop();

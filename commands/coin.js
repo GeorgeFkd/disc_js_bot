@@ -4,6 +4,7 @@ module.exports = {
     name:"coin",
     cooldown:0,
     requiredChannels:[],
+    requiredRole:'',
     description:"tosses a coin for your decisions",
     execute(message,args){
 

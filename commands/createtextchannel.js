@@ -3,6 +3,7 @@ module.exports = {
     name:"createtextchannel",
     cooldown:25,
     requiredChannels:[],
+    requiredRole:'entire circus',
     description:"creates a text channel with the specified names",
     execute(message,args){
         console.log(args.join(" "));

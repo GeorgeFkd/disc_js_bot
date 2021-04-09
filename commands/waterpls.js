@@ -5,6 +5,7 @@ module.exports = {
     name:"waterpls",
     cooldown:45,
     requiredChannels:[],
+    requiredRole:'',
     description:"gives you the role to have reminders to drink water",
     async execute(message,args){
         console.log(message.author)

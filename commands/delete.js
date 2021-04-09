@@ -5,6 +5,7 @@ module.exports = {
     name:"delete",
     cooldown:25,
     requiredChannels:[],
+    requiredRole:'entire circus',
     description:"deletes arg amount of messages",
     execute(message,args){
         

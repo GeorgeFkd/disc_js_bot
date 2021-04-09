@@ -3,6 +3,7 @@ module.exports = {
     name:"help",
     cooldown:30,
     requiredChannels:[],
+    requiredRole:'',
     description:"Shows the user all the available commands and their functionality",
     execute(message,args){
         console.log(args);

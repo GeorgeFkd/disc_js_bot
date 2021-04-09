@@ -5,6 +5,7 @@ module.exports = {
     name:"poll",
     cooldown:15,
     requiredChannels:[],
+    requiredRole:'',
     description:"adds preference reactions to the last message in the same server",
     async execute(message,args){
         

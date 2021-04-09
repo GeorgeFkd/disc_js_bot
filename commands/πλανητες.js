@@ -6,6 +6,7 @@ module.exports = {
     name:"πλανητες",
     cooldown:60,
     requiredChannels:['🔮ζωδια'],
+    requiredRole:'',
     description:"Σε ενημερώνει για την ζωή σου δια μέσου των πλανητών,μόνο έγκυρες προβλέψεις",
     execute(message,args){
        

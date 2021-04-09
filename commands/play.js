@@ -21,6 +21,7 @@ module.exports = {
     name:"play",
     cooldown:0,
     requiredChannels:['playground'],
+    requiredRole:'',
     description:"you can play some mini games vs the bot",
     execute(message,args){
         const enemyID = message.author.id;

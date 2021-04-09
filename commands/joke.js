@@ -12,6 +12,7 @@ module.exports ={
     name:"joke",
     cooldown:0,
     requiredChannels:[],
+    requiredRole:'',
     description:"gives a random cn joke(for now)",
     execute(message,args){
         try{jokes.getRandomCNJoke(function(joke){

@@ -4,6 +4,7 @@ module.exports = {
     name:"email",
     cooldown:180,
     requiredChannels:[],
+    requiredRole:'',
     description:"sending emails for catching error occurings",
     execute(message,args){
         

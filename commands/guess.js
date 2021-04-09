@@ -4,6 +4,7 @@ module.exports = {
     name:'guess',
     cooldown: 60 * 1,
     requiredChannels:[],
+    requiredRole:'',
     description:'a message is sent to you and you have to guess who deleted it',
     async execute(message,args){
         const bot = args.pop();

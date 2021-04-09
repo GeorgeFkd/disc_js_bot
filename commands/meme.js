@@ -5,6 +5,7 @@ module.exports = {
     name:"meme",
     cooldown:0,
     requiredChannels:[],
+    requiredRole:'',
     description:"sends a random reddit meme",
     execute(message,args){
         

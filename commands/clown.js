@@ -5,6 +5,7 @@ module.exports = {
     name:"clown",
     cooldown:0,
     requiredChannels:[],
+    requiredRole:'',
     description:"Sends a random message from Clown Moments server",
     execute(message,args){
         fs.readFile('🤡moments.txt','utf-8',(err,data)=>{
