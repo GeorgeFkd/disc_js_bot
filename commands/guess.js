@@ -2,17 +2,16 @@
 //THIS WORKS
 module.exports = {
     name:'guess',
-    cooldown: 1 * 60,
+    cooldown: 60 * 1,
     description:'a message is sent to you and you have to guess who deleted it',
     async execute(message,args){
         const bot = args.pop();
         message.channel.send('I see you are in for a game of snipe guesser.\nI will send you a snipe and you will have to guess the username of the sender')
         //TODO ΣΙΓΟΥΡΑ ΜΠΟΡΕΙ ΝΑ ΓΙΝΕΙ ΛΙΓΟ ΚΑΛΥΤΕΡΑ refactor soon
-
-        const randsnipesArray = bot.snipes.random();
-        console.log(randsnipesArray)
+        let randsnipesArray=bot.snipes.random();
+        console.log('snipes are',randsnipesArray)
         const randSnipe = randsnipesArray[Math.floor(Math.random()*randsnipesArray.length)]
-        console.log(randSnipe);
+        console.log('the message is ',randSnipe);
         console.log('the keys are:',bot.snipes.keys())
         const allIDs = bot.snipes.keys();
         let theID;
@@ -30,7 +29,7 @@ module.exports = {
         
         const themsg = message.channel.send(`The message is ${randSnipe}.Who sent it?`)
         const filter = (msg)=>msg.author.id === message.author.id;
-        const seconds = 35;
+        const seconds = 60;
         message.channel.send(`You have ${seconds} to guess `)
         message.channel.awaitMessages(filter,
             {time:seconds*1000,max:1,errors:['time']})
@@ -43,7 +42,7 @@ module.exports = {
                 }
             })
             .catch(collected => message.channel.send(`After a minute, you didnt guess.`))
-        //console.log(theAnswer.content);
+        
         
         
 
