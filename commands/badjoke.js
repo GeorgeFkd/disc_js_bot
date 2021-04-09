@@ -5,6 +5,7 @@ const {nonAppreciation,nonAppreciationResponse} = require("../constants");
 module.exports ={
     name:"badjoke",
     cooldown:0,
+    requiredChannels:[],
     description:"you dont appreciate my humor",
     execute(message,args){
         

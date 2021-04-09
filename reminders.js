@@ -57,7 +57,7 @@ class WaterReminder extends Reminder{
     }
     setReminderMessage(){
         this.message = this.mentions +'\n'+ this.message;
-        console.log(this.message)//gia swsth seira einai etsi
+        //gia swsth seira einai etsi
     }
 }
 

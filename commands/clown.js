@@ -4,6 +4,7 @@ const { Util } = require("../node_modules/discord.js");
 module.exports = {
     name:"clown",
     cooldown:0,
+    requiredChannels:[],
     description:"Sends a random message from Clown Moments server",
     execute(message,args){
         fs.readFile('🤡moments.txt','utf-8',(err,data)=>{

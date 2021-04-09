@@ -4,6 +4,7 @@ const email = require("./email");
 module.exports = {
     name:"delete",
     cooldown:25,
+    requiredChannels:[],
     description:"deletes arg amount of messages",
     execute(message,args){
         

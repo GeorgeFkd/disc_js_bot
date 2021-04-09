@@ -4,6 +4,7 @@ const {featureReacts,developerID,calcoholicsGuildID} = require('../constants');
 module.exports = {
     name:"feature",
     cooldown:180,
+    requiredChannels:['testing-grounds','testing-ground-v2'],
     description:"users can recommend features and get reactions from other members",
     execute(message,args){
         const addReaction = (msg,emoji)=>{

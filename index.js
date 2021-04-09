@@ -76,24 +76,41 @@ bot.on('message', async message => {
     command = bot.commands.get(commandName);
   }
 
-  if(!cooldowns.has(command.name)){
+  {//εδω τα cooldowns
+    if(!cooldowns.has(command.name)){
     cooldowns.set(command.name,new Collection())
-  }
-
-  const curr_time = Date.now();
-  const time_stamps = cooldowns.get(command.name)
-  const cooldown_amount = (command.cooldown) * 1000;
-
-  if(time_stamps.has(message.author.id)){
-    const expiration_time = time_stamps.get(message.author.id) + cooldown_amount
-    if(curr_time<expiration_time){
-      const time_left = (expiration_time-curr_time) / 1000;
-      return message.reply(`Perimene ligo re ${time_left.toFixed(1)} more seconds before using ${command.name}`)
     }
+
+    const curr_time = Date.now();
+    const time_stamps = cooldowns.get(command.name)
+    const cooldown_amount = (command.cooldown) * 1000;
+
+    if(time_stamps.has(message.author.id)){
+      const expiration_time = time_stamps.get(message.author.id) + cooldown_amount
+      if(curr_time<expiration_time){
+        const time_left = (expiration_time-curr_time) / 1000;
+        return message.reply(`Perimene ligo re ${time_left.toFixed(1)} more seconds before using ${command.name}`)
+      }
+    }
+  
+
+    time_stamps.set(message.author.id,curr_time)
+    setTimeout(()=> time_stamps.delete(message.author.id),cooldown_amount)
   }
 
-  time_stamps.set(message.author.id,curr_time)
-  setTimeout(()=> time_stamps.delete(message.author.id),cooldown_amount)
+  { 
+    //TODO ΝΑ ΒΑΛΩ ΝΑ ΔΕΙΧΝΕΙ ΜΕ ΣΥΝΔΕΣΜΟ ΤΑ ΚΑΤΑΛΛΗΛΑ ΤΣΑΝΕΛ ΠΡΕΠΕΙ ΝΑ ΒΡΩ ΤΑ ΑΝΤΙΚΕΙΜΕΝΑ ΤΥΠΟΥ ΤΣΑΝΕΛ ΚΑΙ ΝΑ ΤΑ ΒΑΛΩ ΣΤΙΣ ΑΓΚΥΛΕΣ
+    if(command.requiredChannels.length ===0){//means all channels are ok
+      console.log('we gucci')
+    }else if(!command.requiredChannels.includes(message.channel.name) ){
+
+      return message.reply(`The ${commandName} is not ok in the ${message.channel.name}\nTry these channels: ${command.requiredChannels.join(' ')} `)
+    }
+
+    
+  }
+
+
   if(needsBotAsArgs.includes(commandName)){
     args.push(bot)
   }

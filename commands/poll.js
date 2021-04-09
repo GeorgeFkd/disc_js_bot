@@ -4,6 +4,7 @@ const email = require("./email")
 module.exports = {
     name:"poll",
     cooldown:15,
+    requiredChannels:[],
     description:"adds preference reactions to the last message in the same server",
     async execute(message,args){
         

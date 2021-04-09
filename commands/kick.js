@@ -3,6 +3,7 @@
 module.exports = {
     name:"kick",
     cooldown:120,
+    requiredChannels:[],
     description:"kicks someone",
     execute(message,args){
         try {

@@ -6,6 +6,7 @@ const {days,daysEn} = require("../constants");
 module.exports = {
     name:"remindme",
     cooldown:15,
+    requiredChannels:[],
     description:"Sets a personal reminder for this day",
     execute(message,args){
         console.log(args.length);

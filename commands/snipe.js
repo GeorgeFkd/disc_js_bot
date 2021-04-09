@@ -3,6 +3,7 @@ const {calcoholicsGuildID} = require("../constants")
 module.exports = {
     name:"snipe",
     cooldown: 40,
+    requiredChannels:[],
     description:"reveals a deleted message",
     execute(message,args){
         const bot = args.pop();
@@ -16,11 +17,11 @@ module.exports = {
         if(!username){
             console.log('randomized')
             theguildmember = theGuild.members.cache.random();
-            console.log(theguildmember);
+            //console.log(theguildmember);
         }else{
             theguildmember = theGuild.members.cache.filter(user=>user.user.username===username).first()
             console.log("not randomized");
-            console.log(theguildmember)
+            //console.log(theguildmember)
             //this works
         }
 

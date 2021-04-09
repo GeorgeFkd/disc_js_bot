@@ -4,6 +4,7 @@ const { remindmeplsRoleID} = require('../constants');
 module.exports = {
     name:'nowaterpls',
     description:'unsubscribe from the daily water reminders',
+    requiredChannels:[],
     async execute(message,args){
 
         const guildMember = message.guild.members.

@@ -6,7 +6,8 @@ const {clownMomentsID}= require("../constants");
 module.exports = {
     name:"saveclowns",
     cooldown: 25,
-    description:"saves the contents of the clown text channel",
+    description:"saves the contents of the clown text channel[deprecated]",
+    requiredChannels:[],
     execute(message,args){
         message.reply("currently saving them");
         let writeMsg=[];
