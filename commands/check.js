@@ -9,9 +9,9 @@ const columns = ['1','2','3']
 module.exports = {
     name:"check",
     description:"used for test purposes",
-    cooldown: 12,
+    cooldown: 25,
     requiredChannels:['playground','testing-ground-v2'],
-    requiredRole:'entire circus',
+    requiredRole:'',
     async execute(message,args){
         const bot = args.pop();
         console.log(message.channel.id)
@@ -86,7 +86,7 @@ module.exports = {
                                     console.log('randomized');
                                     botRow = Math.floor(Math.random()*3)
                                     botCol = Math.floor(Math.random()*3)
-
+                                    
                                     while(boardList[botRow][botCol]!==0){
                                         botRow = Math.floor(Math.random()*3)
                                         botCol = Math.floor(Math.random()*3)
