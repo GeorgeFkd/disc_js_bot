@@ -59,7 +59,9 @@ module.exports = {
                     if(ok) {//bot plays
                         ({ botRow, botCol } = botDecision(boardList, botRow, botCol));
                     } else {
+                        playerWon = gameFinished(boardList,1)
                         finished = true;
+                        if(playerWon)return message.channel.send('hooray u are better than a mediocre bot')
                         return message.channel.send('the game ended and you couldnt beat a helpless bot')
                     }
                 }   
@@ -68,7 +70,7 @@ module.exports = {
                 theBoard = redrawBoard(theBoard,botRow,botCol,'o')
                 botWon= gameFinished(boardList,0.1);
                 playerWon = gameFinished(boardList,1)
-                message.channel.send(theBoard);
+                
 
                 if(playerWon){
                     finished = true; 
@@ -81,6 +83,7 @@ module.exports = {
                 if(!boardList.some(line=>line.includes(0))){                            
                     return message.channel.send('I placed my move');
                 }
+                message.channel.send(theBoard);
                                                     
             })
             .catch(err=>console.log(err))
