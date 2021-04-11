@@ -43,7 +43,8 @@ module.exports = {
         }
         let isFirstMove,botRow=-1,botCol=-1;
         while(!finished)
-        {        
+        {       
+             
             message.channel.send('Που βάζεις?(γραμμα κενο αριθμος) ')
             await message.channel.awaitMessages(filter
                 ,{time:10 * 1000,max:1,errors:['time']})
@@ -60,35 +61,44 @@ module.exports = {
                         theBoard = redrawBoard(theBoard,rowNum,colNum,'x')
                         boardList[rowNum][colNum] = 1;
                         //if it is first then it has length 2
+                        //TODO NA ALLAKSEI AYTO TO CONDITION
                         isFirstMove = theBoard.split('x').length-1===1?true:false
+                        console.log('not the split',isFirstMove)
                         if(isFirstMove){
                             [botRow,botCol] = firstMove(rowNum,colNum)
                         }else{
-                            
-                            let attack = tictactoeResponse(boardList,0.1);
-                            let def = tictactoeResponse(boardList,1);
-                            console.log('wtf is going on')
-                            console.log(attack,def,boardList)
-                            if(attack) {
-                                console.log('the attack')
-                                botRow = attack[0];//ans[0];
-                                botCol = attack[1];//ans[1];
-                            } else if(def){
-                                console.log('the defense');
-                                botRow= def[0];//ans[0];
-                                botCol = def[1]
-                                //get on the attack
-                            }else{
-                                botRow = Math.floor(Math.random()*2)
-                                botCol = Math.floor(Math.random()*2)
-                                while(boardList[botRow][botCol]!==0){
-                                    botRow = Math.floor(Math.random()*2)
-                                    botCol = Math.floor(Math.random()*2)
-                                }
+                            let ok = checkIfEmptySquare(boardList)
+                            console.log('ok',ok);
+                            if(ok) {
+                                let attack = tictactoeResponse(boardList,0.1);
+                                let def = tictactoeResponse(boardList,1);
+                                console.log('wtf is going on')
+                                console.log(attack,def,boardList)
+                                if(boardList[attack[0]][attack[1]]===0){
+    
+                                    console.log('the attack')
+                                    botRow = attack[0];//ans[0];
+                                    botCol = attack[1];//ans[1];
+                                }else if(boardList[def[0]][def[1]]===0){
+                                    botRow= def[0];//ans[0];
+                                    botCol = def[1]
+                                }else{
+                                    console.log('randomized');
+                                    botRow = Math.floor(Math.random()*3)
+                                    botCol = Math.floor(Math.random()*3)
+
+                                    while(boardList[botRow][botCol]!==0){
+                                        botRow = Math.floor(Math.random()*3)
+                                        botCol = Math.floor(Math.random()*3)
+                                        console.log(botRow,botCol)
+                                    }
+                                }                                                                                
+                                console.log('the choice',botRow,botCol)                            
+                                console.table(boardList);
+                            } else {
+                                finished = true;
+                                return message.channel.send('the game ended and you couldnt beat a helpless bot')
                             }
-                            console.log('the choice',botRow,botCol)
-                            
-                            console.log(boardList);
                             
                         }
                         boardList[botRow][botCol] = 0.1;
@@ -98,27 +108,18 @@ module.exports = {
                         message.channel.send(theBoard);
 
                         if(playerWon){
-                            finished = true;
-                            
+                            finished = true; 
                             return message.channel.send('Seems like your only one left functioning braincell was enough to beat a mildly retarded bot')
-                            
-
                         }else if(botWon){
                             finished = true;
                             return message.channel.send('you lost to a stupid bot incompetent human being and you are worrying about AI taking your jobs')
                         }else{
-                            message.channel.send('I placed my move');
-                        }
-                        
-                        //1 for the player 0.1 for the bot in the gameboard
-                        //a function that checks if there is a win
-                        //a function for the bot that checks its move
-    
-                    } else {
-                        //o xrhsths ebale se tetragwno poy hdh yphrxe
+                            if(!boardList.some(line=>line.includes(0))){                            
+                                message.channel.send('I placed my move');
+                            }
+                        }                                    
+                    }else{ //o xrhsths ebale se tetragwno poy hdh yphrxe
                         message.channel.send('That is illegal place your move properly thi time');
-
-                        
                     }
                 })
                 .catch(err=>console.log(err))
@@ -162,9 +163,15 @@ function redrawBoard(charboard,rowNum,colNum,char){
 
 }
 
-function addX_O(arr,row,column,char){
-    arr[row][column]= char;
-    return arr;
+function checkIfEmptySquare(board){
+    for(let i=0;i<3;i++){
+        for(let j=0;j<3;j++){
+            if(board[i][j]===0){
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 function firstMove(moveCol,moveRow){
@@ -178,9 +185,6 @@ function firstMove(moveCol,moveRow){
     }
     
     
-}
-function add(total,num){
-    return total + num;
 }
 
 function gameFinished(board,val){
@@ -229,7 +233,6 @@ function tictactoeResponse(board,val){
         arr[1] = firstDiag;
         arr[2] = sDiag;
         arr[3] = colSum
-        console.log(arr)
         if(arr.some(num=>num===val * 2)){
             console.log('danger')
             //here we find the danger and just return the indexes
@@ -279,6 +282,6 @@ function tictactoeResponse(board,val){
         colSum = 0;
 
   }
-  return false;//u can go on attack
+  return [2,3];
 
 }
