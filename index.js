@@ -16,7 +16,7 @@ const {calcoholicsGuildID,remindmeplsRoleID,clownMomentsID} = require("./constan
 global.XP = new Collection();
 const saveThatClown = require('./utilities/saveclowns')
 const cooldowns = new Map();//'command name ','new disc collection'
-
+const errorHandler = require('./utilities/error');
 
 bot.snipes = new Collection();
 
@@ -126,12 +126,13 @@ bot.on('message', async message => {
   if(needsBotAsArgs.includes(commandName)){
     args.push(bot)
   }
-  try{
-    command.execute(message,args)
-  }catch(e){
-    console.error(e);
-    msg.reply('there was an error trying to execute that command!');
-  }
+
+      try {
+        command.execute(message,args)
+      } catch (err) {
+        errorHandler(message,err)
+      }
+  
   
 
 })

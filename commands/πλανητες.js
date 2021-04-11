@@ -1,6 +1,4 @@
 const fs = require('fs');
-const email = require('./email')
-const quotes = [];
 
 module.exports = {
     name:"πλανητες",

@@ -7,11 +7,9 @@ module.exports ={
     description:"gets you an intense air exhaling dad joke",
     execute(message,args){
           message.reply("im trying to stop crying bitch here is your damn joke");
-        try{jokes.getRandomDadJoke(function(joke){
-            message.reply(joke);
+        jokes.getRandomDadJoke(function(joke){
+            message.channel.send(joke);
         })
-        }catch(e){
-            message.reply(`sth went wrong ${e}`);
-        }
+        
     }
 }

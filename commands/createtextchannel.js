@@ -1,4 +1,5 @@
 const email = require("./email");
+const errorHandler = require('../utilities/error')
 module.exports = {
     name:"createtextchannel",
     cooldown:25,
@@ -19,8 +20,7 @@ module.exports = {
             console.log(channel," created");
         })
         .catch((err)=>{
-            email.execute(`The error occured in createtextchannel\n
-            msg:${message.content}`,[])
+            errorHandler(message,err)
         })
         const theChannel = server.channels.cache.find(ch=>ch.name = name);
         const theCategory = server.channels.cache.find(c=> c.name == "📝current"

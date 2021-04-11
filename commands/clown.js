@@ -7,12 +7,12 @@ module.exports = {
     requiredChannels:[],
     requiredRole:'',
     description:"Sends a random message from Clown Moments server",
-    execute(message,args){
+    async execute(message,args){
         fs.readFile('🤡moments.txt','utf-8',(err,data)=>{
             if(err){
                 message.channel.send("Something went terribly wrong and you should wait");
-                email.execute(message,[e]);
-                return;
+                throw new Error('something happened with the input file')
+                
             }
             let dataArr = data.split(',').join().split('\n');
             dataArr = dataArr.filter((msg)=>!msg.includes("<@"));

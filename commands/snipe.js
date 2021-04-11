@@ -1,5 +1,5 @@
 const {calcoholicsGuildID} = require("../constants")
-//TODO NA BEBAIWTHW OTI DOYLEYEI
+
 module.exports = {
     name:"snipe",
     cooldown: 40,
