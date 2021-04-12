@@ -25,7 +25,7 @@ module.exports = {
         let theBoard = drawBoard()//the string representing the board
         message.channel.send(theBoard);
 
-        const filter = ((msg)=> (msg.author.id === player && terms.includes(msg.content.toLowerCase())))
+        const filter = ((msg)=> (msg.author.id === player && (terms.includes(msg.content.toLowerCase()))||msg.content.toLowerCase().includes('stop')))
         //checks that the player is responding
         let turns=0;
         
@@ -36,7 +36,11 @@ module.exports = {
         await message.channel.awaitMessages(filter
             ,{time:10 * 1000,max:1,errors:['time']})
             .then(async(collected)=>{
-                
+                let ans = collected.first().content;
+                if(ans==='stop'){
+                    finished = true;
+                    return;
+                }
                 let [row,column] = collected.first().content.split(' ')
                 const rowNum = chars.indexOf(row);
                 const colNum = Number(column)-1;
