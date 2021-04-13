@@ -14,7 +14,7 @@ module.exports = {
         //δυο δομες : ωρα και μηνυμα και ωρα μηνυμα και μερα
         //TODO NA GINEI REFACTOR EDW
         const [hour,minutes] = args[0].split(".");
-        let mydate,mymsg= args.slice(1).join(" ");;
+        let mymsg= args.slice(1).join(" ");;
         
         const date = new Date()
         const utcdate = new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()))//.getDay();

@@ -37,6 +37,7 @@ let waterReminders = [
     new WaterReminder(22,10,greeceTimeZone,messageForWater),
     new WaterReminder(15,30,greeceTimeZone,messageForWater),
     new WaterReminder(11,14,greeceTimeZone,messageForWater),
+    new WaterReminder(18,15,greeceTimeZone,messageForWater),
 ]
 
 

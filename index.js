@@ -111,7 +111,7 @@ bot.on('message', async message => {
   }
 
   {
-    //console.log(message.author,'message.author') this gives a user not a guildmember
+    console.log(message.author,'message.author') //this gives a user not a guildmember
     const theMember = message.guild.members.cache.get(message.author.id);
     const theRoles = theMember.roles.cache.map((role)=>role.name);
     if(command.requiredRole === ''){
