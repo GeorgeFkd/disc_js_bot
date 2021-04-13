@@ -41,7 +41,7 @@ module.exports = {
                     finished = true;
                     return;
                 }
-                let [row,column] = collected.first().content.split(' ')
+                let [row,column] = ans.split(' ')
                 const rowNum = chars.indexOf(row);
                 const colNum = Number(column)-1;
                 if(boardList[rowNum][colNum]!==0){
@@ -214,9 +214,10 @@ function tictactoeResponse(board,val){
 
             if(danger === 1){
                 for(let sq;sq<3;sq++){                        
-                    if(board[sq][sq]===0)//there is an empty spot{
+                    if(board[sq][sq]===0){//there is an empty spot{
                         console.log('shit',sq)
-                        return [sq,sq];//case 1                         
+                        return [sq,sq];//case 1   }                      
+                    }
                 }
             }
 
@@ -224,9 +225,10 @@ function tictactoeResponse(board,val){
                 console.log('s diag sus')
                     for(let sq=0;sq<3;sq++){   
                         console.log('ind',sq,2-sq)                     
-                        if(board[sq][2-sq]===0)//there is an empty spot{
+                        if(board[sq][2-sq]===0){//there is an empty spot{
                             console.log('damn',sq)
-                            return [sq,2-sq];//case 1                         
+                            return [sq,2-sq];//case 1
+                        }                         
                     }
             }
 
