@@ -4,7 +4,7 @@ const joobleApiKey = require('../config.json')['jooble-gr']
 module.exports = {
     name:"motivation",
     description:"Sends you a motivational message to pursue your projects",
-    cooldown:2*60*1000,
+    cooldown:2*60,
     requiredChannels:[],
     requiredRole:'',
     async execute(message,args){
