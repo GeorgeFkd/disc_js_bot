@@ -1,30 +1,23 @@
-# How to Build Your First Discord Bot with Node.js
+# A Discord Bot
 
-Michiel Mulders shows you how to install and set up a new Discord bot, which is made easier thanks to the API offered by the Discord.js package.
+This project was made in Nodejs using the [discord.js](https://discord.js.org/#/docs/discord.js/main/general/welcome) library as a fun project for a server i was part of to experiment with the technologies involved.
 
-Link to article on SitePoint: [https://www.sitepoint.com/discord-bot-node-js/](https://www.sitepoint.com/discord-bot-node-js/)
+For long this project was hosted on Heroku(PaaS) using the files-> Procfile and Procfile.TXT and has retired due to the server remaining inactive.
 
-## Requirements
+To make a discord bot somebody could begin with [this article](https://www.howtogeek.com/364225/how-to-make-your-own-discord-bot/), and then dive deeper into the discord.js library mentioned above. 
 
-- [Node.js](http://nodejs.org/)
-- [Discord](https://discordapp.com/) account
+## Documentation
 
-## Installation Steps (if applicable)
+In index.js is the basic initialisation of the project and responding to events sent by Discord, through the discord.js library.
 
-1. Clone repo
-2. Run `npm install`
-3. Add Discord credentials in a `.env` file
-3. Run `node index.js`
-4. Interact with your Discord bot via your web browser
+On the 'ready' event, some features execute their necessary setup while others don't need to.
 
-## License
+Commands are read by the filename inside the /commands folder and activated when a server member sends !filename, e.g. !coin, by reading the contents of the folder and mapping each filename to its default export which then executes the command when called.
 
-SitePoint's code archives and code examples are licensed under the MIT license.
+New commands can be added by adding files inside the command folder exporting an object with the same structure as in other files. 
 
-Copyright © 2020 SitePoint
+The structure is of type:
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+{name:string,cooldown:number,requiredChannels:string [],requiredRoles:string,description:string,execute:(msg,args)=>void}
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The project is not strongly typed(there is an intention of writing it in TS), any typing comes from the discord.js library.
