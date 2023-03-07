@@ -1,12 +1,12 @@
 # A Discord Bot
 
-This project was made in Nodejs using the [discord.js](https://discord.js.org/#/docs/discord.js/main/general/welcome) library as a fun project for a server i was part of to experiment with the technologies involved.
+This project was made in Nodejs using the [discord.js](https://discord.js.org/#/docs/discord.js/main/general/welcome) library as a fun project for a server i was part of to experiment with the technologies involved.(Third Party APIs:Jooble,Steam,Reddit etc., discord.js library,nodemailer,axios,cron jobs)
 
 For long this project was hosted on Heroku(PaaS) using the files-> Procfile and Procfile.TXT and has retired due to the server remaining inactive.
 
-To make a discord bot somebody could begin with [this article](https://www.howtogeek.com/364225/how-to-make-your-own-discord-bot/), and then dive deeper into the discord.js library mentioned above. 
+To make a discord bot somebody could begin with [this article](https://www.howtogeek.com/364225/how-to-make-your-own-discord-bot/), and then dive deeper into the discord.js library mentioned above(also many YT tutorials exist).
 
-## Documentation
+## Code Documentation
 
 In index.js is the basic initialisation of the project and responding to events sent by Discord, through the discord.js library.
 
