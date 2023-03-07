@@ -6,6 +6,15 @@ For long this project was hosted on Heroku(PaaS) using the files-> Procfile and 
 
 To make a discord bot somebody could begin with [this article](https://www.howtogeek.com/364225/how-to-make-your-own-discord-bot/), and then dive deeper into the discord.js library mentioned above(also many YT tutorials exist).
 
+## Showcase
+Can play tic tac toe with advanced algorithms:(a tangle including ifs to make sure it doesn't lose)
+![Can Play Tic Tac Toe](https://user-images.githubusercontent.com/69716466/223463177-3d84cae8-c309-45c6-a996-096c3f9f3e1a.png)
+
+Can Show you a meme from a subreddit if you choose so.(The API: https://meme-api.com/)
+![Meme Command](https://user-images.githubusercontent.com/69716466/223464721-9a6e1c88-ccb8-4c5d-98e7-fdc90752b770.png)
+
+
+
 ## Code Documentation
 
 In index.js is the basic initialisation of the project and responding to events sent by Discord, through the discord.js library.
