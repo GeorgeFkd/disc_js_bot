@@ -1,23 +1,24 @@
-
-
 module.exports = {
-    name:"kick",
-    cooldown:120,
-    requiredChannels:[],
-    requiredRole:'',
-    description:"kicks someone",
-    execute(message,args){
+    name: "kick",
+    cooldown: 120,
+    requiredChannels: [],
+    requiredRole: "",
+    description: "kicks someone",
+    execute(message, args) {
         try {
             if (message.mentions.users.size) {
                 const taggedUser = message.mentions.users.first();
-                message.channel.send(`You wanted to kick: ${taggedUser.username}`);
-            }else{
-                message.reply('Please tag a valid user!');
-            } 
+                message.channel.send(
+                    `You wanted to kick: ${taggedUser.username}`
+                );
+            } else {
+                message.reply("Please tag a valid user!");
+            }
         } catch (err) {
-            message.channel.send("Something went terribly wrong and you should wait");
-            email.execute(message,args);
+            message.channel.send(
+                "Something went terribly wrong and you should wait"
+            );
+            email.execute(message, args);
         }
-    }
-
-}
+    },
+};

@@ -1,26 +1,27 @@
-const fs = require('fs');
+const fs = require("fs");
 
 module.exports = {
-    name:"πλανητες",
-    cooldown:5,//ΗΕΥ
-    requiredChannels:['🔮ζωδια'],
-    requiredRole:'',
-    description:"Σε ενημερώνει για την ζωή σου δια μέσου των πλανητών,μόνο έγκυρες προβλέψεις",
-    execute(message,args){
-       
-        fs.readFile('predictions.txt','utf-8',(err,data)=>{
-            if(err){
+    name: "πλανητες",
+    cooldown: 5, //ΗΕΥ
+    requiredChannels: ["🔮ζωδια"],
+    requiredRole: "",
+    description:
+        "Σε ενημερώνει για την ζωή σου δια μέσου των πλανητών,μόνο έγκυρες προβλέψεις",
+    execute(message, args) {
+        fs.readFile("predictions.txt", "utf-8", (err, data) => {
+            if (err) {
                 console.log(err);
-                message.channel.send("Something went terribly wrong and you should wait");
-                
+                message.channel.send(
+                    "Something went terribly wrong and you should wait"
+                );
+
                 return;
             }
-            let dataArr = data.split('|')
-            let response = dataArr[Math.floor(Math.random()*dataArr.length)]
-            console.log(response)
-            response = response.replace(/\d{1,}./,'')
+            let dataArr = data.split("|");
+            let response = dataArr[Math.floor(Math.random() * dataArr.length)];
+            console.log(response);
+            response = response.replace(/\d{1,}./, "");
             message.channel.send(response);
-        })
-
-    }
-}
+        });
+    },
+};
